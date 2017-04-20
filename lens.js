@@ -97,8 +97,6 @@ function show_success(msg) {
         "<div class='ui-state-highlight ui-corner-all ssio-success'>" +
             "Success!<br><br>" +
             "<span class='ssio-success-text'>" + msg + "</span><br><br> " +
-            "<input type='email' class='ssio-email ssio-form-control' placeholder='Enter your Email'> <input class='ssio-email-send ssio-btn' style='font-size:14px;border:0;' type='button' value='Send Receipt'>" +
-            "<br><span class='ssio-email-status-msg'></span>" +
             "<br><a href='#' class='ssio-finish'>Finish</a>" +
         "</div>"
     );
@@ -107,30 +105,6 @@ function show_success(msg) {
 
 function show_status(msg) {
     $("#shapeshift-lens-modal .ssio-status").html(msg);
-}
-
-function send_success_email(email, txid) {
-    $.post(ssio_protocol + "shapeshift.io/mail", {
-        email: email,
-        txid: txid
-    }).done(function (response) {
-        console.log("sent email", response);
-        if(response.error) {
-            var to_display = response.error;
-        } else {
-            var to_display = response.email.message;
-        }
-        $('#shapeshift-lens-modal .ssio-email-status-msg').text(to_display);
-    }).error(function(response) {
-
-        if(response.error == "I'm busy right now, sorry.") {
-            // iterate while busy signal until the email gets successfully sent.
-            setTimeout(function() {
-                send_success_email(email, txid);
-            }, 3000);
-        }
-    });
-
 }
 
 var altcoin_deposit_limit = '' // defined here (globally) because it is used in a bunch of places
@@ -292,10 +266,6 @@ function inject_modal() {
 
                             show_success("<div class='ssio-in-out'>" + incoming + " " + altcoin_icon + " " + in_type + " was converted to " + outgoing + " " + bitcoin_icon + " BTC and sent to " + "<strong>" + withdraw + "</strong></div>");
 
-                            $('.ssio-email-send').click(function() {
-                                var email = $("#shapeshift-lens-modal .ssio-email").val();
-                                send_success_email(email, txid);
-                            });
                             clearInterval(interval_id);
                             expiration = null;
                             return
