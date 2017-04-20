@@ -110,6 +110,7 @@ function show_status(msg) {
 var altcoin_deposit_limit = '' // defined here (globally) because it is used in a bunch of places
 var spinner = '<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
 var interval_id;
+var pay_button_clicked;
 
 var already_injected = false;
 function inject_modal() {
@@ -127,18 +128,20 @@ function inject_modal() {
             "<div class='top-body clearfix'>" +
             "<span class='ssio-label'>Destination:</span>" +
             "<div class='ssio-form-item ssio-col-md-8'><input class='ssio-address ssio-form-control' disabled></div>" +
-            "<div class='ssio-form-item ssio-col-md-4'><input class='ssio-amount ssio-form-control' data-trigger='focus' data-toggle='popover' data-placement='left' data-content='Use this to specify an exact amount of Bitcoin for the destination address (useful for paying invoices, etc)' placeholder='Amount (Optional)' disabled></div>" +
+            "<div class='ssio-form-item ssio-col-md-4'><input class='ssio-amount ssio-form-control' data-trigger='focus' data-toggle='popover' data-placement='left' data-content='Use this to specify an exact amount of Bitcoin for the destination address (useful for paying invoices, etc)' placeholder='Amount (Optional)'></div>" +
             "</div>" +
             "<div class='pay-with'><select class='ssio-currency-dropdown'>" +
                 "<option value='---'>Pay with:</option>" +
             "</select></div>" +
-	            "<div class='ssio-form-item last'><input class='ssio-form-control ssio-return-address' data-trigger='focus' data-toggle='popover' data-placement='left' data-content='Any deposit greater than the deposit limit will be returned only if a return address has been entered. Otherwise you must contact shapeshift.io support for any returns.' placeholder='Return Address (Optional)' disabled></div>" +
+	            "<div class='ssio-form-item last'><input class='ssio-form-control ssio-return-address' data-trigger='focus' data-toggle='popover' data-placement='left' data-content='Any deposit greater than the deposit limit will be returned only if a return address has been entered. Otherwise you must contact shapeshift.io support for any returns.' placeholder='Return Address (Optional)'></div>" +
             "</div>" +
         "</div>" +
     "</div>"
     );
 
-    function pay_button_clicked(event) {
+    
+
+    pay_button_clicked = function (event) {
         // This function gets fired when the pay button is clicked. It fires off
         // the "shift" api call, then starts the timers.
 
@@ -146,10 +149,10 @@ function inject_modal() {
 		console.log(crypto_data);
         var btc_address = $("#shapeshift-lens-modal .ssio-address").val();
         var return_address = $('#shapeshift-lens-modal .ssio-return-address').val();
-        var currency = $("#shapeshift-lens-modal .ssio-currency-dropdown").val();
-        var altcoin_name = crypto_data[currency.toUpperCase()].name;
-        var altcoin_icon = "<img src='" + crypto_data[currency.toUpperCase()].image + "'>";
-        var bitcoin_icon = "<img src='" + crypto_data["BTC"].image + "'>";
+        var currency = "xmr";
+        var altcoin_name = "Monero";
+        var altcoin_icon = "<img src='https://shapeshift.io/images/coins/monero.png'>";
+        var bitcoin_icon = "<img src='https://shapeshift.io/images/coins/bitcoin.png'>";
 		var public_key = '';
 		var nice_rsAddress = '';
         var pair = currency + "_btc";
@@ -334,13 +337,13 @@ function inject_modal() {
         });
     }
 
-    $('#shapeshift-lens-modal .ssio-currency-dropdown').change(function(event) {
-        $('#shapeshift-lens-modal .pay-with').fadeOut();
-        if($(this).val() !== '---') {
-	        // When the user selects which currency they want to pay with,
-	        // show the further options, and make the pay button appear.
+//    $('#shapeshift-lens-modal .ssio-currency-dropdown').change(function(event) {
+//        $('#shapeshift-lens-modal .pay-with').fadeOut();
+//        if($(this).val() !== '---') {
+//	        // When the user selects which currency they want to pay with,
+//	        // show the further options, and make the pay button appear.
 	        $('.ssio-limit, .ssio-exchange-rate').fadeIn();
-	        var altcoin_symbol = $(this).val();
+	        var altcoin_symbol = "xmr"
 	        var pair = "btc_" + altcoin_symbol;
 	
 	        $("#shapeshift-lens-modal .ssio-exchange-rate").html(spinner);
@@ -367,8 +370,8 @@ function inject_modal() {
 	
 	                $("#shapeshift-lens-modal .ssio-limit").text(altcoin_deposit_limit + " " + altcoin_symbol.toUpperCase());
 	                $('#shapeshift-lens-modal .ssio-panel-body').addClass('ssio-active');
-	                $('#shapeshift-lens-modal .pay-with').fadeIn();
-	                $("#shapeshift-lens-modal .ssio-panel-body input").removeAttr("disabled");
+	                // $('#shapeshift-lens-modal .pay-with').fadeIn();
+	                // $("#shapeshift-lens-modal .ssio-panel-body input").removeAttr("disabled");
 	            }).error(function(response) {
 	                show_error("General Ajax failure");
 	            });
@@ -377,17 +380,17 @@ function inject_modal() {
 	            show_error("General Ajax failure");
 	        });
 	
-	        $("#shapeshift-lens-modal").dialog("option", "buttons",
-	            [ {text: "Cancel", click: function() {$(this).dialog('close');}}, { text: "Pay", click: pay_button_clicked }]
-	        );
-        };
-        if($(this).val() == '---') {
-	        $('.ssio-limit, .ssio-exchange-rate').hide();
-	        $("#shapeshift-lens-modal .ssio-panel-body input").attr("disabled", "disabled");
-	        $('.ssio-panel-body').removeClass('ssio-active');
-	        $('#shapeshift-lens-modal .pay-with').fadeIn();
-        }
-    });
+	        // $("#shapeshift-lens-modal").dialog("option", "buttons",
+	        //     [ {text: "Cancel", click: function() {$(this).dialog('close');}}, { text: "Pay", click: pay_button_clicked }]
+	        // );
+//        };
+//        if($(this).val() == '---') {
+//	        $('.ssio-limit, .ssio-exchange-rate').hide();
+//	        // $("#shapeshift-lens-modal .ssio-panel-body input").attr("disabled", "disabled");
+//	        $('.ssio-panel-body').removeClass('ssio-active');
+//	        $('#shapeshift-lens-modal .pay-with').fadeIn();
+//        }
+//    });
 
     already_injected = true; // only inject once
 }
@@ -454,7 +457,8 @@ $(function() {
                 already_injected = false;
                 inject_modal();
                 clearInterval(interval_id);
-            }
+            },
+            buttons: [ {text: "Cancel", click: function() {$(this).dialog('close');}}, { text: "Pay", click: pay_button_clicked }]
         });
 
         $("body").on("click", ".ssio-finish", function (event) {

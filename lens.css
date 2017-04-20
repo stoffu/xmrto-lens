@@ -160,7 +160,7 @@ span.ssio-label {
 	top:50%;
 	margin-right:-100px;
 	margin-top:-15px;
-
+  visibility: hidden;
 }
 
 #shapeshift-lens-modal .ssio-address.ssio-form-control {
@@ -193,7 +193,7 @@ span.ssio-label {
 
 .ssio-panel-body .ssio-form-item, .ssio-panel-body .ssio-label  {
 	-webkit-transition: all .5s ease-in-out;
-	opacity: .2;
+	opacity: 1;
 }
 .ssio-panel-body.ssio-active .ssio-form-item, .ssio-panel-body.ssio-active .ssio-label  {
 	opacity: 1;
