@@ -1,0 +1,553 @@
+.shapeshift-lens-link {
+    font-size: large;
+}
+
+#shapeshift-lens-modal {
+    display: none;
+    text-align: left;
+    font-size: medium;
+    padding:0;
+    position: relative;
+    overflow: visible;
+}
+
+.ssio-dialog .ui-dialog-title {
+	line-height: 1.42857143;
+}
+
+#shapeshift-lens-modal select {
+    width: 200px;
+    border:1px solid #ddd;
+    background: transparent;
+    height:30px;
+}
+
+#shapeshift-lens-modal input {
+    width: 350px;
+    margin-bottom: 5px;
+}
+
+#shapeshift-lens-modal .ssio-email-send {
+    width: auto
+}
+
+#shapeshift-lens-modal .ssio-email-status-msg {
+    font-size: small;
+}
+
+#shapeshift-lens-modal .ssio-limit {
+    font-weight: bold
+}
+
+#shapeshift-lens-modal .ssio-exchange-rate {
+    font-weight: bold
+}
+
+#shapeshift-lens-modal .ssio-timer {
+    padding:0;
+}
+
+#shapeshift-lens-modal .ssio-status {
+    text-align: center;
+    position: relative;
+    top:-3px;
+
+}
+
+#shapeshift-lens-modal .ssio-error {
+    font-weight: bold;
+    font-size: x-large;
+    padding: 10px;
+}
+
+#shapeshift-lens-modal .ssio-success {
+    font-weight: bold;
+    font-size: x-large;
+    padding: 10px;
+}
+
+#shapeshift-lens-modal .ssio-success-text {
+    font-size: large;
+}
+#shapeshift-lens-modal .ssio-error-text {
+    font-size: large;
+}
+
+#ssio-qrcode img {
+    text-align: center;
+    margin: 10px auto 0 auto;
+}
+
+#shapeshift-lens-modal .ssio-finish {
+    font-size: medium;
+}
+
+.ltc .ui-selectmenu-item-icon {
+    background: url("chrome-extension://__MSG_@@extension_id__/images/litecoin.png")
+}
+
+.ppc .ui-selectmenu-item-icon {
+    background: url("chrome-extension://__MSG_@@extension_id__/images/peercoin.png")
+}
+
+.doge .ui-selectmenu-item-icon {
+    background: url("chrome-extension://__MSG_@@extension_id__/images/dogecoin.png")
+}
+
+.drk .ui-selectmenu-item-icon {
+    background: url("chrome-extension://__MSG_@@extension_id__/images/darkcoin.png")
+}
+
+/* Overrides */
+
+span.ssio-label {
+	display: block;
+	color:#fff;
+	margin-bottom:10px;
+	font-weight: 500;
+}
+
+.ui-widget-content.ssio-dialog {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	box-shadow: 0 0 30px 2px rgba(0,0,0,.4);
+}
+
+.ui-widget-content.ssio-dialog {
+	padding:0 !important;
+	border:0;
+	background: #28394d;
+}
+.ssio-dialog .ui-dialog-buttonpane.ui-widget-content { 
+	background: #28394d;
+	border:0;
+	border-radius: 0 0 4px 4px;
+	margin-top:0;
+}
+.ssio-form-control {
+	border-radius: 4px;
+	border:0;
+	padding:12px 10px;
+	background: #fff;
+	box-sizing: border-box;
+	width:100% !important;
+}
+
+.ssio-dialog .ui-dialog-titlebar.ui-widget-header {
+	background: #fff;
+	border-radius: 4px 4px 0px 0px;
+	border:0;
+	padding:10px 20px 10px 68px;
+	position: relative;
+}
+.ssio-dialog .ui-dialog-titlebar.ui-widget-header:before {
+	content:"";
+	background: transparent url("chrome-extension://__MSG_@@extension_id__/images/fox.png") no-repeat center right;
+	width:38px;
+	height:38px;
+	position: absolute;
+	left:20px;
+	top:4px;
+}
+
+.rates {
+	background: #1c2836;
+	border-bottom:1px solid #000;
+	box-shadow: 0 1px 0 rgba(255,255,255,.2);
+	color:#8193a7;
+	padding:10px 20px;
+	font-size:15px;
+	overflow: hidden;
+}
+.rates .pull-left {
+	float:left;
+}
+.rates .pull-right {
+	float:right;
+}
+.rates span {
+	color:#fff;
+}
+.ssio-panel-body {
+	padding:20px 20px 12px 20px;
+}
+#shapeshift-lens-modal .ssio-panel-body.ssio-active .pay-with {
+	position: absolute;
+	top: -38px;
+	right: 35px;
+	margin:0;
+}
+
+#shapeshift-lens-modal .pay-with {
+	-webkit-transition: all .1s ease-in-out;
+	position: absolute;
+	right:50%;
+	top:50%;
+	margin-right:-100px;
+	margin-top:-15px;
+
+}
+
+#shapeshift-lens-modal .ssio-address.ssio-form-control {
+	background: #1c2836;
+	color:#fff;
+}
+
+#shapeshift-lens-modal label {
+	display: block;
+	color:#fff;
+	margin-bottom:10px;
+}
+#shapeshift-lens-modal .ssio-col-md-8 {
+	width:68%;
+	float:left;
+}
+#shapeshift-lens-modal .ssio-col-md-4 {
+	width:30%;
+	float:right;
+}
+
+#shapeshift-lens-modal .ssio-form-item {
+	margin-bottom:12px;
+	position: relative;
+}
+
+#shapeshift-lens-modal .ssio-form-item.last {
+	margin-bottom:0;
+}
+
+.ssio-panel-body .ssio-form-item, .ssio-panel-body .ssio-label  {
+	-webkit-transition: all .5s ease-in-out;
+	opacity: .2;
+}
+.ssio-panel-body.ssio-active .ssio-form-item, .ssio-panel-body.ssio-active .ssio-label  {
+	opacity: 1;
+}
+
+.ui-widget-content.ssio-dialog .ui-dialog-buttonset .ui-button {
+	border:0;
+	background: #3a4e66;
+	color:#fff;
+	font-size: 15px;
+	font-weight: bold;
+	padding:5px 10px;
+	margin-top:0;
+}
+
+.ui-widget-content.ssio-dialog  .ui-dialog-buttonset .ui-button:last-child {
+	background: #53bf7c;
+	margin-right:0;
+	
+}
+.ssio-deposit {
+	margin-top:15px;
+}
+.ssio-deposit, .ssio-recipient {
+	display: block;
+	text-align: center;
+	color:#8193a7;
+}
+.depo-address {
+	color:#fff;
+	font-weight: bold;
+	display: inline-block;
+	margin-top:5px;
+}
+#ssio-qrcode img {
+	padding:5px;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.ssio-status-outer {
+	display: block;
+	background: #1c2836;
+	color:#fff;
+	padding:20px;
+	margin-top:20px;
+	border-radius: 0px 0px 4px 4px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.ssio-pull-left {
+	float:left;
+}
+.ssio-pull-right {
+	float:right;
+}
+
+#shapeshift-lens-modal .ssio-success {
+	background: transparent;
+	color:#fff;
+	font-weight: normal;
+	padding:20px;
+	border:0;
+}
+.ssio-btn {
+	padding:12px 10px;
+	border-radius: 4px;
+	background: #53bf7c;
+	color:#fff;
+}
+
+.ssio-dialog {
+	overflow: visible !important;
+}
+
+/* Webkit spinner */
+
+.spinner {
+  margin: 0 auto;
+  width: 70px;
+  text-align: center;
+  margin-top:3px;
+  display: inline-block;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #8193a7;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+/* ssio-popover */
+
+.ssio-popover {
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    max-width: 276px;
+    padding: 1px;
+    position: absolute;
+    text-align: left;
+    top: -30px;
+    white-space: normal;
+    z-index: 1060;
+    width:250px;
+}
+.ssio-popover.top {
+    margin-top: -10px;
+}
+.ssio-popover.right {
+    margin-left: 10px;
+}
+.ssio-popover.bottom {
+    margin-top: 10px;
+}
+.ssio-popover.left {
+    margin-left: -10px;
+}
+.ssio-popover-title {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 5px 5px 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    margin: 0;
+    padding: 8px 14px;
+}
+.ssio-popover-content {
+    padding: 9px 14px;
+}
+.ssio-popover > .arrow, .ssio-popover > .arrow:after {
+    border-color: transparent;
+    border-style: solid;
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+.ssio-popover > .arrow {
+    border-width: 11px;
+}
+.ssio-popover > .arrow:after {
+    border-width: 10px;
+    content: "";
+}
+.ssio-popover.top > .arrow {
+    border-bottom-width: 0;
+    border-top-color: rgba(0, 0, 0, 0.25);
+    bottom: -11px;
+    left: 50%;
+    margin-left: -11px;
+}
+.ssio-popover.top > .arrow:after {
+    border-bottom-width: 0;
+    border-top-color: #fff;
+    bottom: 1px;
+    content: " ";
+    margin-left: -10px;
+}
+.ssio-popover.right > .arrow {
+    border-left-width: 0;
+    border-right-color: rgba(0, 0, 0, 0.25);
+    left: -11px;
+    margin-top: -11px;
+    top: 50%;
+}
+.ssio-popover.right > .arrow:after {
+    border-left-width: 0;
+    border-right-color: #fff;
+    bottom: -10px;
+    content: " ";
+    left: 1px;
+}
+.ssio-popover.bottom > .arrow {
+    border-bottom-color: rgba(0, 0, 0, 0.25);
+    border-top-width: 0;
+    left: 50%;
+    margin-left: -11px;
+    top: -11px;
+}
+.ssio-popover.bottom > .arrow:after {
+    border-bottom-color: #fff;
+    border-top-width: 0;
+    content: " ";
+    margin-left: -10px;
+    top: 1px;
+}
+.ssio-popover.left > .arrow {
+    border-left-color: rgba(0, 0, 0, 0.25);
+    border-right-width: 0;
+    margin-top: -11px;
+    right: -11px;
+    top: 50%;
+}
+.ssio-popover.left > .arrow:after {
+    border-left-color: #fff;
+    border-right-width: 0;
+    bottom: -10px;
+    content: " ";
+    right: 1px;
+}
+
+.clearfix:before, .clearfix:after, .dl-horizontal dd:before, .dl-horizontal dd:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after, .form-horizontal .form-group:before, .form-horizontal .form-group:after, .btn-toolbar:before, .btn-toolbar:after, .btn-group-vertical > .btn-group:before, .btn-group-vertical > .btn-group:after, .nav:before, .nav:after, .navbar:before, .navbar:after, .navbar-header:before, .navbar-header:after, .navbar-collapse:before, .navbar-collapse:after, .pager:before, .pager:after, .ssio-panel-body:before, .ssio-panel-body:after, .modal-footer:before, .modal-footer:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after, .dl-horizontal dd:after, .container:after, .container-fluid:after, .row:after, .form-horizontal .form-group:after, .btn-toolbar:after, .btn-group-vertical > .btn-group:after, .nav:after, .navbar:after, .navbar-header:after, .navbar-collapse:after, .pager:after, .ssio-panel-body:after, .modal-footer:after {
+    clear: both;
+}
+
+/* Custom Dropdown */
+.dd {
+	background: #eee url("chrome-extension://__MSG_@@extension_id__/images/dropdown_arrow.png") no-repeat center right;
+	border-radius: 4px;
+	padding:5px 10px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.dd img {
+	width:20px;
+	height:20px;
+	margin-right:15px;
+}
+.ddChild {
+	left:50% !important;
+	margin-left:-225px;
+	height:auto !important;
+	top:32px !important;
+}
+.ddChild ul {
+	padding:0;
+	background: #fff;
+	width:450px;
+	border-radius: 4px;
+	box-shadow: 0 0 5px rgba(0,0,0,.3);
+	overflow: hidden;
+
+}
+.ddChild ul li {
+	list-style: none;
+	padding:10px;
+	border-bottom:1px solid #ddd;
+	float:left;
+	width:33.33%;
+	
+}
+.ddChild ul li:first-child {
+	border-radius: 4px 4px 0 0;
+}
+.ddChild ul li:last-child {
+	border-radius: 0 0 4px 4px;
+	border:0;
+}
+.ddChild ul li:hover {
+	background: #eee;
+}
+.ddChild ul li.selected {
+	background: #f8f8f8;
+}
+.pay-with *:focus {
+	outline:none;
+}
+
+.ssio-deposit img, .ssio-recipient img {width:30px;height:30px}
+
+.ssio-success-text img {
+	width:30px;
+	height:30px;
+}
+
+
+.ssio-in-out img {
+	width:30px;
+	height:30px;
+}
+
+.public-key {
+	display: block;
+	font-size:11px;
+	margin-top:5px;
+	color:rgba(255,255,255,.6);
+}
+
+.long {
+	overflow-x: auto;
+	width:550px;
+	margin:0 auto;
+}
+.alert {
+	margin-top:10px;
+	font-size:12px;
+	width:550px;
+	margin:0 auto;
+
+}
