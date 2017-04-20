@@ -7,21 +7,21 @@
       "js": [ "jquery-2.1.1.min.js", "jquery-ui.min.js", "jquery.dd.min.js", "qrcode.js", "lens.js" ],
       "matches": [ "\u003Call_urls>" ]
    } ],
-   "description": "Send Altcoins to a Bitcoin address using ShapeShift automatic conversion.",
+   "description": "Send Monero to a Bitcoin address using XMR.to.",
    "icons": {
       "128": "128x128_1.png"
    },
-   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArIybSpRXk0+ANxUeNlXiNGtUg5wKh1Q4l1iU2Iqd4jCSlSGbtVgSfACPdQ98+aepMnFMdKGPs3DiUfdpe5zrJUmTAANRzdxaVLgApTPAlrbh/MUs8nDyItm0ulFWY80mkonBSkBGElBaWEPfZyFJm4p6nNPLWMcXmkHL2dfgNJZcoTees/IkTDVkgh6s1FH0KI081vTpIVCnlCufcgGvZN6HfcLuMXo3RepusFPOFnm1zOV/TcHycjExHGlG8pj6NrH6lIKcX4/fn2n5wNxdRH9jpJaTuyEBBVAiay7MAsETxvezA8UueQqE6TL7+lc12mu2QcgXcw6AvteAL6tumwIDAQAB",
+//   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArIybSpRXk0+ANxUeNlXiNGtUg5wKh1Q4l1iU2Iqd4jCSlSGbtVgSfACPdQ98+aepMnFMdKGPs3DiUfdpe5zrJUmTAANRzdxaVLgApTPAlrbh/MUs8nDyItm0ulFWY80mkonBSkBGElBaWEPfZyFJm4p6nNPLWMcXmkHL2dfgNJZcoTees/IkTDVkgh6s1FH0KI081vTpIVCnlCufcgGvZN6HfcLuMXo3RepusFPOFnm1zOV/TcHycjExHGlG8pj6NrH6lIKcX4/fn2n5wNxdRH9jpJaTuyEBBVAiay7MAsETxvezA8UueQqE6TL7+lc12mu2QcgXcw6AvteAL6tumwIDAQAB",
    "manifest_version": 2,
-   "name": "ShapeShift Lens",
+   "name": "XMR.to Lens",
    "page_action": {
       "default_icon": {
          "19": "19x19_1.png",
          "38": "38x38_1.png"
       },
-      "default_title": "ShapeShift has found Bitcoin addresses on this page."
+      "default_title": "XMR.to Lens has found Bitcoin addresses on this page."
    },
-   "permissions": [ "https://shapeshift.io/" ],
+   "permissions": [ "https://xmr.to/" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "1.49",
    "web_accessible_resources": [ "*.gif", "images/*", "*.png" ]

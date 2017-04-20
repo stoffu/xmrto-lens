@@ -82,22 +82,6 @@
     font-size: medium;
 }
 
-.ltc .ui-selectmenu-item-icon {
-    background: url("chrome-extension://__MSG_@@extension_id__/images/litecoin.png")
-}
-
-.ppc .ui-selectmenu-item-icon {
-    background: url("chrome-extension://__MSG_@@extension_id__/images/peercoin.png")
-}
-
-.doge .ui-selectmenu-item-icon {
-    background: url("chrome-extension://__MSG_@@extension_id__/images/dogecoin.png")
-}
-
-.drk .ui-selectmenu-item-icon {
-    background: url("chrome-extension://__MSG_@@extension_id__/images/darkcoin.png")
-}
-
 /* Overrides */
 
 span.ssio-label {
@@ -141,7 +125,7 @@ span.ssio-label {
 }
 .ssio-dialog .ui-dialog-titlebar.ui-widget-header:before {
 	content:"";
-	background: transparent url("chrome-extension://__MSG_@@extension_id__/images/fox.png") no-repeat center right;
+	background: transparent url("chrome-extension://__MSG_@@extension_id__/images/xmrto.png") no-repeat center right;
 	width:38px;
 	height:38px;
 	position: absolute;
