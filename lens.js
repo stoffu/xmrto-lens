@@ -31,15 +31,6 @@ function round(value, exp) {
 }
 
 
-var crypto_data = '';
-
-function getCoins(callback) {
-	$.getJSON( "https://shapeshift.io/getcoins", function( data ) {
-		crypto_data = data;	
-		callback();
-	});
-}
-
 // Change to "//" when shapeshift.io's api supports HTTPS.
 // until then, the extension will break on https pages.
 var ssio_protocol = "https://";
@@ -146,7 +137,6 @@ function inject_modal() {
         // the "shift" api call, then starts the timers.
 
         $("#shapeshift-lens-modal").dialog("option", "buttons", []);
-		console.log(crypto_data);
         var btc_address = $("#shapeshift-lens-modal .ssio-address").val();
         var return_address = $('#shapeshift-lens-modal .ssio-return-address').val();
         var currency = "xmr";
@@ -432,14 +422,6 @@ $(function() {
         var address = $(this).data('address');
         //chrome.runtime.sendMessage({clicked_address: address});
 
-			getCoins(function(){
-				$.each(crypto_data, function(i, currCoin) {
-					if(currCoin.symbol !== 'BTC' && currCoin.status == 'available') {
-						$('#shapeshift-lens-modal select').append('<option value="' + currCoin.symbol.toLowerCase() + '" data-image="' + currCoin.image + '">' + currCoin.name + '</option');
-					}
-				});
-				$("#shapeshift-lens-modal select").msDropDown();			
-			});
 
 
 
