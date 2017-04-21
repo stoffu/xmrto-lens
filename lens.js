@@ -120,7 +120,7 @@ function inject_modal() {
 
     
 
-    pay_button_clicked = function (event) {
+    var pay_button_clicked_ssio = function (event) {
         // This function gets fired when the pay button is clicked. It fires off
         // the "shift" api call, then starts the timers.
 
@@ -314,6 +314,158 @@ function inject_modal() {
             }
         });
     }
+
+    pay_button_clicked = function(event) {
+        var currency = "xmr";
+        var altcoin_name = "Monero";
+        var altcoin_icon = "<img src='https://shapeshift.io/images/coins/monero.png'>";
+        var bitcoin_icon = "<img src='https://shapeshift.io/images/coins/bitcoin.png'>";
+
+        var btc_amount = $("#shapeshift-lens-modal .ssio-amount").val()
+        if (!btc_amount) {
+            return;
+        }
+        $("#shapeshift-lens-modal").dialog("option", "buttons", []);
+
+        var btc_dest_address = $("#shapeshift-lens-modal .ssio-address").val();
+
+        var order_create_param = {
+            btc_amount: btc_amount,
+            btc_dest_address: btc_dest_address
+        };
+        $.post("https://xmr.to/api/v1/xmr2btc/order_create/", order_create_param).done(function(order_create_res) {
+            if(order_create_res.error) {
+                show_error(order_create_res.error_msg);
+                return;
+            }
+            var ticks = 0;
+            var seconds_remaining = null;
+            interval_id = setInterval(function() {
+                if(ticks % 8 == 0) {
+                    $.post("https://xmr.to/api/v1/xmr2btc/order_status_query/", { uuid: order_create_res.uuid } ).done(function(order_status_query_res) {
+                        if (order_status_query_res.error) {
+                            show_error(order_status_query_res.error_msg);
+                            clearInterval(interval_id);
+                            return;
+                        }
+
+                        var state = order_status_query_res.state;
+                        // var btc_amount = order_status_query_res.btc_amount;
+                        // var btc_dest_address = order_status_query_res.btc_dest_address;
+                        // var uuid = order_status_query_res.uui;
+                        // var btc_num_confirmations = order_status_query_res.btc_num_confirmations;
+                        // var btc_num_confirmations_before_purge = order_status_query_res.btc_num_confirmations_before_purge;
+                        var btc_transaction_id = order_status_query_res.btc_transaction_id;
+                        // var created_at = order_status_query_res.created_at;
+                        // var expires_at = order_status_query_res.expires_at;
+                        var seconds_till_timeout = order_status_query_res.seconds_till_timeout;
+                        var xmr_amount_total = order_status_query_res.xmr_amount_total;
+                        var xmr_amount_remaining = order_status_query_res.xmr_amount_remaining;
+                        var xmr_num_confirmations_remaining = order_status_query_res.xmr_num_confirmations_remaining;
+                        // var xmr_price_btc = order_status_query_res.xmr_price_btc;
+                        var xmr_receiving_address = order_status_query_res.xmr_receiving_address;
+                        var xmr_required_amount = order_status_query_res.xmr_required_amount;
+                        var xmr_required_payment_id = order_status_query_res.xmr_required_payment_id;
+
+                        seconds_remaining = state == "UNPAID" || state == "UNDERPAID" ? seconds_till_timeout : null;
+
+                        var final_modal = "<span class='ssio-deposit'>" +
+                            "Send " + xmr_amount_remaining + " " + altcoin_icon + " " + altcoin_name +
+                            " to <br>" + "<span class='depo-address'>" + xmr_receiving_address + "</span> " +
+                            "<br>with Payment ID " + xmr_required_payment_id
+                            "</span>" +
+                            "<div id='ssio-qrcode'></div>" +
+                            "<br>" +
+                            "<span class='ssio-recipient'>It will be converted into " + bitcoin_icon + " Bitcoin, and sent to<br>" + "<span class='depo-address'>" + btc_dest_address + "</span>" +
+                            "<br> as <b>" + btc_amount + "</b> BTC" +
+                            "</span><div class='ssio-status-outer'><div class='ssio-status ssio-pull-left'></div><div class='ssio-timer ssio-pull-right'></div></div>";
+
+                        //var qrstring = deposit;
+                        //if(amount)
+                        //{
+                        //    qrstring = altcoin_name.toLowerCase()+":"+deposit+"?amount="+amount;
+                        //}
+                        //new QRCode(document.getElementById("ssio-qrcode"), qrstring);
+
+                        $("#shapeshift-lens-modal").html(final_modal);
+
+                        switch (state) {
+                            case "TO_BE_CREATED":
+                                show_status("Status: order creation pending. " + spinner);
+                                break;
+                            case "UNPAID":
+                                show_status("Status: Awaiting Your " + altcoin_name + " " + spinner);
+                                break;
+                            case "UNDERPAID":
+                                show_status("Status: Awaiting Your " + altcoin_name + " (underpaid) " + spinner);
+                                break;
+                            case "PAID_UNCONFIRMED":
+                                show_status("Status: Payment Received, waiting for confirmation. " + spinner);
+                                break;
+                            case "PAID":
+                                show_status("Status: Payment received and confirmed, now sending BTC. " + spinner);
+                                break;
+                            case "BTC_SENT":
+                                show_success("<div class='ssio-in-out'>" + incoming + " " + altcoin_icon + " " + in_type + " was converted to " + outgoing + " " + bitcoin_icon + " BTC and sent to " + "<strong>" + withdraw + "</strong></div>");
+                                clearInterval(interval_id);
+                                return;
+                            case "TIMED_OUT":
+                                show_error("order timed out before payment was complete");
+                                clearInterval(interval_id);
+                                return;
+                            case "NOT_FOUND":
+                                show_error("order wasn’t found in system (never existed or was purged)");
+                                clearInterval(interval_id);
+                                return;
+                        }
+                    });
+                }
+
+                if (seconds_remaining )//|| expiration)
+                {
+                    seconds_remaining--;
+                    //var seconds = seconds_remaining ? seconds_remaining : ((expiration - new Date()) / 1000).toFixed(0);
+                    var seconds = seconds_remaining;
+                    var timeText = ""
+                    var sec = 0;
+                    if(seconds > 59)
+                    {
+                        var min = Math.floor(seconds / 60);
+                        sec = seconds - (min * 60);
+
+                        if(sec < 10)
+                        {
+                            sec = "0"+sec;
+                        }
+
+                        timeText = min+":"+sec;
+                    }
+                    else
+                    {
+                        if(seconds < 10)
+                        {
+                            sec = "0"+seconds;
+                        }
+
+                        timeText ="0:"+sec;
+                    }
+                    
+                    console.log(seconds);
+                    if(seconds > 0) {
+                        $("#shapeshift-lens-modal .ssio-timer").text(timeText + " until expiration");
+                    } else {
+                        show_error("Time Expired! Please try again.");
+                        clearInterval(interval_id);
+                        return;
+                    }
+                } else {
+                    $("#shapeshift-lens-modal .ssio-timer").text('HOGEHOGE');
+                }
+
+                ticks++;
+            }, 1000);
+        });
+    };
 
 	        $('.ssio-limit, .ssio-exchange-rate').fadeIn();
 	        var altcoin_symbol = "xmr"
