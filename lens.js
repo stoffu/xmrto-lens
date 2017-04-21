@@ -333,6 +333,7 @@ function inject_modal() {
             btc_amount: btc_amount,
             btc_dest_address: btc_dest_address
         };
+        $("#shapeshift-lens-modal").html("<span class='ssio-label' style='margin-left:5%'>Calling XMR.TO's API... " + spinner + "</span>");
         $.post("https://xmr.to/api/v1/xmr2btc/order_create/", order_create_param).done(function(order_create_res) {
             if(order_create_res.error) {
                 show_error(order_create_res.error_msg);
@@ -370,10 +371,12 @@ function inject_modal() {
                         seconds_remaining = state == "UNPAID" || state == "UNDERPAID" ? seconds_till_timeout : null;
 
                         var final_modal = "<span class='ssio-deposit'>" +
-                            "Send " + xmr_amount_remaining + " " + altcoin_icon + " " + altcoin_name +
-                            " to <br>" + "<span class='depo-address'>" + xmr_receiving_address + "</span> " +
-                            "<br>with Payment ID " + xmr_required_payment_id
-                            "</span>" +
+                            "Send " + xmr_amount_remaining + " XMR to:<br>" +
+                            "<span class='depo-address'>" + xmr_receiving_address + "</span> <br>" +
+                            "with Payment ID: <br>" +
+                            "<span class='depo-address'>" + xmr_required_payment_id + "</span> <br>" +
+                            "Order secret key: <span class='depo-address'>" + order_create_res.uuid + "</span>" +
+                            "</span> " +
                             "<div id='ssio-qrcode'></div>" +
                             "<br>" +
                             "<span class='ssio-recipient'>It will be converted into " + bitcoin_icon + " Bitcoin, and sent to<br>" + "<span class='depo-address'>" + btc_dest_address + "</span>" +
@@ -450,7 +453,6 @@ function inject_modal() {
                         timeText ="0:"+sec;
                     }
                     
-                    console.log(seconds);
                     if(seconds > 0) {
                         $("#shapeshift-lens-modal .ssio-timer").text(timeText + " until expiration");
                     } else {
@@ -459,7 +461,7 @@ function inject_modal() {
                         return;
                     }
                 } else {
-                    $("#shapeshift-lens-modal .ssio-timer").text('HOGEHOGE');
+                    $("#shapeshift-lens-modal .ssio-timer").text('');
                 }
 
                 ticks++;
