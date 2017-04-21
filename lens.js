@@ -107,12 +107,12 @@ function inject_modal() {
             "<div class='top-body clearfix'>" +
             "<span class='ssio-label'>Destination:</span>" +
             "<div class='ssio-form-item ssio-col-md-8'><input class='ssio-address ssio-form-control' disabled></div>" +
-            "<div class='ssio-form-item ssio-col-md-4'><input class='ssio-amount ssio-form-control' data-trigger='focus' data-toggle='popover' data-placement='left' data-content='Use this to specify an exact amount of Bitcoin for the destination address (useful for paying invoices, etc)' placeholder='Amount (Optional)'></div>" +
+            "<div class='ssio-form-item ssio-col-md-4'><input class='ssio-amount ssio-form-control' data-trigger='focus' data-toggle='popover' data-placement='left' data-content='Use this to specify an exact amount of Bitcoin for the destination address (useful for paying invoices, etc)' placeholder='Amount'></div>" +
             "</div>" +
             "<div class='pay-with'><select class='ssio-currency-dropdown'>" +
                 "<option value='---'>Pay with:</option>" +
             "</select></div>" +
-	            "<div class='ssio-form-item last'><input class='ssio-form-control ssio-return-address' data-trigger='focus' data-toggle='popover' data-placement='left' data-content='Any deposit greater than the deposit limit will be returned only if a return address has been entered. Otherwise you must contact shapeshift.io support for any returns.' placeholder='Return Address (Optional)'></div>" +
+	            "<div class='ssio-form-item last' style='visibility:hidden;position:absolute'><input class='ssio-form-control ssio-return-address' data-trigger='focus' data-toggle='popover' data-placement='left' data-content='Any deposit greater than the deposit limit will be returned only if a return address has been entered. Otherwise you must contact shapeshift.io support for any returns.' placeholder='Return Address (Optional)'></div>" +
             "</div>" +
         "</div>" +
     "</div>"
@@ -124,7 +124,6 @@ function inject_modal() {
         // This function gets fired when the pay button is clicked. It fires off
         // the "shift" api call, then starts the timers.
 
-        $("#shapeshift-lens-modal").dialog("option", "buttons", []);
         var btc_address = $("#shapeshift-lens-modal .ssio-address").val();
         var return_address = $('#shapeshift-lens-modal .ssio-return-address').val();
         var currency = "xmr";
@@ -135,15 +134,16 @@ function inject_modal() {
 		var nice_rsAddress = '';
         var pair = currency + "_btc";
         var btc_amount = $("#shapeshift-lens-modal .ssio-amount").val()
+        if (!btc_amount) {
+            return;
+        }
+        $("#shapeshift-lens-modal").dialog("option", "buttons", []);
 
         $("#shapeshift-lens-modal").html("Calling ShapeShift.io's API..." + spinner);
 
         if(btc_amount) {
             data = {withdrawal: btc_address, pair: pair, amount: btc_amount, returnAddress: return_address};
             url = "shapeshift.io/sendamount"
-        } else {
-            data = {withdrawal: btc_address, pair: pair};
-            url = "shapeshift.io/shift"
         }
 
         $.post(ssio_protocol + url, data).done(function(response) {
