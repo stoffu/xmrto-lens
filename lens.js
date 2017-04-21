@@ -324,30 +324,17 @@ function inject_modal() {
 			
 	        $('#shapeshift-lens-modal .ssio-more-options').show();
 	
-	        $.get(ssio_protocol + "shapeshift.io/rate/" + pair, function(response) {
+	        $.get(ssio_protocol + "xmr.to/api/v1/xmr2btc/order_parameter_query/", function(response) {
 	            if(response.error) {
-	                show_error("ShapeShift API returned an error: " + response.error);
+	                show_error("XMR.TO API returned an error: " + response.error_msg);
 	                return;
 	            }
-	            var rate = response.rate;
-	            var formatted_rate = round(rate, 2);
-	            $("#shapeshift-lens-modal .ssio-exchange-rate").text("1 BTC = " + formatted_rate + " " + altcoin_symbol.toUpperCase());
+	            $("#shapeshift-lens-modal .ssio-exchange-rate").text("1 XMR = " + response.price + " BTC");
 	
-	            $.get(ssio_protocol + "shapeshift.io/limit/" + pair, function(response) {
-	                if(response.error) {
-	                    show_error(response.error);
-	                    return;
-	                }
-	                var btc_deposit_limit = response.limit;
-	                altcoin_deposit_limit = (btc_deposit_limit * rate).toFixed(4);
+                    var lower_limit = response.lower_limit;
+	                var upper_limit = response.upper_limit;
 	
-	                $("#shapeshift-lens-modal .ssio-limit").text(altcoin_deposit_limit + " " + altcoin_symbol.toUpperCase());
-	                $('#shapeshift-lens-modal .ssio-panel-body').addClass('ssio-active');
-	                // $('#shapeshift-lens-modal .pay-with').fadeIn();
-	                // $("#shapeshift-lens-modal .ssio-panel-body input").removeAttr("disabled");
-	            }).error(function(response) {
-	                show_error("General Ajax failure");
-	            });
+	                $("#shapeshift-lens-modal .ssio-limit").text("min/max: " + lower_limit + "/" + upper_limit + " BTC");
 	
 	        }).error(function(response) {
 	            show_error("General Ajax failure");
