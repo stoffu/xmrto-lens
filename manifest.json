@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "XMR.TO Lens",
-  "description": "Send Monero to a Bitcoin address using XMR.TO",
+  "description": "__MSG_manifest_description__",
   "version": "1.0",
   "background": {
     "scripts": [ "background.js" ]
@@ -19,8 +19,9 @@
         "19": "19x19_1.png",
         "38": "38x38_1.png"
      },
-     "default_title": "XMR.TO Lens has found Bitcoin addresses on this page."
+     "default_title": "__MSG_manifest_default_title__"
   },
   "permissions": [ "https://xmr.to/" ],
-  "web_accessible_resources": [ "*.gif", "*.png" ]
+  "web_accessible_resources": [ "*.gif", "*.png" ],
+  "default_locale": "en"
 }

@@ -40,7 +40,7 @@ function show_success(msg) {
     // the transaction went successfully.
     $("#xmrto-lens-modal").html(
         "<div class='xmrto-success'>" +
-            "<div class='text-orange text-bold text-xlarge'>Success!</div>" +
+            "<div class='text-orange text-bold text-xlarge'>" + chrome.i18n.getMessage("success_header") + "</div>" +
             "<div class='vspace-10'></div>" +
             msg +
         "</div>"
@@ -48,7 +48,7 @@ function show_success(msg) {
 }
 
 function show_status(msg) {
-    $("#xmrto-lens-modal .xmrto-status").html("Status: <span class='text-white'>" + msg + "</span>");
+    $("#xmrto-lens-modal .xmrto-status").html(chrome.i18n.getMessage("status") + ": <span class='text-white'>" + msg + "</span>");
 }
 
 var spinner = '<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
@@ -63,19 +63,19 @@ function inject_modal() {
     $('body').append(
     "<div id='xmrto-lens-modal'>" +
         "<div class='xmrto-panel-header'>" +
-            "<div class='pull-left'>Min: <span class='xmrto-min-limit text-white'></span> Max: <span class='xmrto-max-limit text-white'></span></div>" +
-            "<div class='pull-right'>Rate: <span class='xmrto-rate text-white'></span></div>" +
+            "<div class='pull-left'>" + chrome.i18n.getMessage("min") + ": <span class='xmrto-min-limit text-white'></span> " + chrome.i18n.getMessage("max") + ": <span class='xmrto-max-limit text-white'></span></div>" +
+            "<div class='pull-right'>" + chrome.i18n.getMessage("rate") + ": <span class='xmrto-rate text-white'></span></div>" +
         "</div>"+
         "<div class='xmrto-panel-body'>" +
             "<div>" +
-                "<span class='text-white'>Destination:</span>" +
+                "<span class='text-white'>" + chrome.i18n.getMessage("destination") + ":</span>" +
                 "<input class='xmrto-address xmrto-form-control' disabled></input>" +
             "</div>" +
             "<div class='vspace-20'></div>" +
             "<div>" +
-                "<span class='text-white'>Amount in Bitcoin:</span>" +
+                "<span class='text-white'>" + chrome.i18n.getMessage("amount_in_bitcoin") + ":</span>" +
                 "<input class='xmrto-amount xmrto-form-control' type=number></input>" +
-                "<button class='xmrto-pay-button width-30 pull-right'>Pay</button>" +
+                "<button class='xmrto-pay-button width-30 pull-right'>" + chrome.i18n.getMessage("pay") + "</button>" +
             "</div>" +
         "</div>" +
     "</div>"
@@ -93,7 +93,7 @@ function inject_modal() {
             btc_amount: btc_amount,
             btc_dest_address: btc_dest_address
         };
-        $("#xmrto-lens-modal").html("<span class='hspace-10'></span>Calling XMR.TO's API... " + spinner);
+        $("#xmrto-lens-modal").html("<span class='hspace-10'></span>" + chrome.i18n.getMessage("calling_api") + spinner);
         $.post("https://xmr.to/api/v1/xmr2btc/order_create/", order_create_param).done(function(order_create_res) {
             if(order_create_res.error) {
                 show_error(order_create_res.error_msg);
@@ -129,21 +129,21 @@ function inject_modal() {
 
                         var panel_body =
                         "<div class='xmrto-panel-body'>" +
-                            "<div>Send <span class='xmrto-remaining-amount text-white'></span> to:<div>" +
+                            "<div>" + chrome.i18n.getMessage("send_pre") + " <span class='xmrto-remaining-amount text-white'></span> " + chrome.i18n.getMessage("send_post") +":<div>" +
                             "<div class='text-white text-xsmall'>" + xmr_receiving_address + "</div>" + 
-                            "<div>with Payment ID <span class='text-white'>" + xmr_required_payment_id + "</span><div>" +
-                            "<div class='text-small text-bold text-orange'>Don't forget to attach the Payment ID!</div>" +
+                            "<div>" + chrome.i18n.getMessage("paymentid") + " <span class='text-white'>" + xmr_required_payment_id + "</span><div>" +
+                            "<div class='text-small text-bold text-orange'>" + chrome.i18n.getMessage("caution") + "</div>" +
                             "<div class='vspace-20'></div>" +
-                            "<div>The fund will be converted to <span class='text-white'>" + btc_amount + "</span> BTC and sent to </div>" +
+                            "<div>" + chrome.i18n.getMessage("convert_pre") + " <span class='text-white'>" + btc_amount + "</span> " + chrome.i18n.getMessage("convert_post") + "</div>" +
                             "<div class='text-white'>" + btc_dest_address + "</div>" +
                             "<div class='vspace-10'></div>" +
-                            "<div>Order secret key:</div>" +
+                            "<div>" + chrome.i18n.getMessage("orderkey") + ":</div>" +
                             "<div class='text-white'>" + order_create_res.uuid + "</div>" +
                             "<div class='vspace-10'></div>" +
-                            "<div>Command line:</div>" +
+                            "<div>" + chrome.i18n.getMessage("commandline") + ":</div>" +
                             "<div class='text-xxsmall'><textarea class='width-100' style='height:40px' onclick='this.select()'>transfer 4 " + xmr_receiving_address + " " + xmr_amount_remaining + " " + xmr_required_payment_id + "</textarea></div>" +
                             "<div class='vspace-10'></div>" +
-                            "<div>QR code:</div>" +
+                            "<div>" + chrome.i18n.getMessage("qrcode") + ":</div>" +
                             "<div id='xmrto-qrcode'></div>" +
                         "</div>";
 
@@ -164,7 +164,11 @@ function inject_modal() {
                             new QRCode(document.getElementById("xmrto-qrcode"), qrstring);
 
                             if (state == "UNDERPAID") {
-                                $("#xmrto-lens-modal .xmrto-remaining-amount").text("remaining " + xmr_amount_remaining + " XMR (totaling " + xmr_amount_total + " XMR)");
+                                $("#xmrto-lens-modal .xmrto-remaining-amount").text(
+                                    chrome.i18n.getMessage("remaining_pre") + " " + xmr_amount_remaining + " " + 
+                                    chrome.i18n.getMessage("remaining_mid") + " " + xmr_amount_total + " " +
+                                    chrome.i18n.getMessage("remaining_post")
+                                );
                             } else {
                                 $("#xmrto-lens-modal .xmrto-remaining-amount").text(xmr_amount_remaining + " XMR");
                             }
@@ -176,37 +180,41 @@ function inject_modal() {
 
                         switch (state) {
                             case "TO_BE_CREATED":
-                                show_status("Order creation pending " + spinner);
+                                show_status(chrome.i18n.getMessage("state_tobecreated") + " " + spinner);
                                 break;
                             case "UNPAID":
-                                show_status("Awaiting your Monero " + spinner);
+                                show_status(chrome.i18n.getMessage("state_unpaid") + " " + spinner);
                                 break;
                             case "UNDERPAID":
-                                show_status("Awaiting your remaining Monero " + spinner);
+                                show_status(chrome.i18n.getMessage("state_underpaid") + " " + spinner);
                                 break;
                             case "PAID_UNCONFIRMED":
-                                show_status("Payment received! Waiting for confirmation " + spinner);
+                                show_status(chrome.i18n.getMessage("state_unconfirmed") + " " + spinner);
                                 break;
                             case "PAID":
-                                show_status("Payment received and confirmed! Now sending Bitcoin " + spinner);
+                                show_status(chrome.i18n.getMessage("state_paid") + " " + spinner);
                                 break;
                             case "BTC_SENT":
                                 show_success(
-                                    "<div><span class='text-white'>" + xmr_required_amount + " XMR</span> was converted to <span class='text-white'>" + btc_amount + " BTC</span> and sent to</div>" +
+                                    "<div>" +
+                                        "<span class='text-white'>" + xmr_required_amount + " XMR</span> " +
+                                        chrome.i18n.getMessage("success_part1") + " <span class='text-white'>" + btc_amount + " BTC</span> " +
+                                        chrome.i18n.getMessage("success_part2") +
+                                    " </div>" +
                                     "<div class='text-white'>" + btc_dest_address + "</div>" +
                                     "<div class='vspace-10'></div>" +
-                                    "<div>Transaction ID:</div>" +
+                                    "<div>" + chrome.i18n.getMessage("success_txid") + ":</div>" +
                                     "<div class='text-white text-small'>" + btc_transaction_id + "</div>" +
                                     "<div class='vspace-10'></div>" +
-                                    "<div>Number of confirmations: <span class='text-white'>" + btc_num_confirmations + "</span></div>"
+                                    "<div>" + chrome.i18n.getMessage("success_numconfirm") + ": <span class='text-white'>" + btc_num_confirmations + "</span></div>"
                                 );
                                 return;
                             case "TIMED_OUT":
-                                show_error("Order timed out before payment was complete");
+                                show_error(chrome.i18n.getMessage("state_timedout"));
                                 clearInterval(interval_id);
                                 return;
                             case "NOT_FOUND":
-                                show_error("Order wasn’t found in system (never existed or was purged)");
+                                show_error(chrome.i18n.getMessage("state_notfound"));
                                 clearInterval(interval_id);
                                 return;
                         }
@@ -217,7 +225,7 @@ function inject_modal() {
                     var minutes = Math.floor(seconds_till_timeout / 60);
                     var seconds = seconds_till_timeout - minutes * 60;
                     var timeText = (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-                    $("#xmrto-lens-modal .xmrto-timer").text("Expires in " + timeText);
+                    $("#xmrto-lens-modal .xmrto-timer").text(chrome.i18n.getMessage("expire_pre") + " " + timeText + " " + chrome.i18n.getMessage("expire_post"));
                 }
 
                 ticks++;

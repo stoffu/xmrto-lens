@@ -1,4 +1,4 @@
-shapeshift-lens
+XMR.TO Lens
 ===============
 
-Chrome extension for shapeshift.io
+Chrome extension for XMR.TO

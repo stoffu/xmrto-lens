@@ -1,0 +1,38 @@
+{
+  "manifest_description": {
+    "message": "Senden Sie Monero an eine Bitcoin Adresse mit XMR.TO"
+  },
+  "manifest_default_title": {
+    "message": "XMR.TO Lens hat Bitcoin Adressen auf dieser Seite gefunden."
+  },
+  "success_header": { "message": "Erfolg!" },
+  "rate": { "message": "Satz" },
+  "destination": { "message": "Ziel" },
+  "amount_in_bitcoin": { "message": "Betrag in Bitcoin" },
+  "pay": { "message": "Zahlen" },
+  "calling_api": { "message": "Wir rufen die XMR.TO API an... " },
+  "send_pre": { "message": "Senden Sie" },
+  "send_post": { "message": "an" },
+  "paymentid": { "message": "mit Zahlungs-ID" },
+  "caution": { "message": "Vergessen Sie nicht, die Zahlungs-ID anzuhängen!" },
+  "convert_pre": { "message": "Der Fonds wird in" },
+  "convert_post": { "message": "BTC umgewandelt, und auf diese adresse übertragen:" },
+  "orderkey": { "message": "Bestellen Schlüssel" },
+  "commandline": { "message": "Befehlszeile" },
+  "remaining_pre": { "message": "restlichen" },
+  "remaining_mid": { "message": "XMR (insgesamt" },
+  "remaining_post": { "message": "XMR)" },
+  "expire_pre": { "message": "Läuft in" },
+  "expire_post": { "message": "ab" },
+  "state_tobecreated": { "message": "Auftragserstellung steht noch aus" },
+  "state_unpaid": { "message": "Auf Ihr Monero warten" },
+  "state_underpaid": { "message": "Auf Ihr restlichen Monero warten" },
+  "state_unconfirmed": { "message": "Die Zahlung wurde eingegangen! Auf Bestätigung warten" },
+  "state_paid": { "message": "Die Zahlung wurde eingegangen und bestätigt! Jetzt Bitcoin senden" },
+  "success_part1": { "message": "wurde in" },
+  "success_part2": { "message": "umgewandelt, und auf diese adresse übertragen:" },
+  "success_txid": { "message": "Transaktions-ID" },
+  "success_numconfirm": { "message": "Anzahl der Bestätigungen" },
+  "state_timedout": { "message": "Auftrag wurde abgelaufen, bevor die Zahlung abgeschlossen war" },
+  "state_notfound": { "message": "Auftrag wurde im System nicht gefunden" }
+}
