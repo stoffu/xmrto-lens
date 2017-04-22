@@ -8,7 +8,7 @@
   },
   "content_scripts": [ {
     "css": [ "jquery-ui.min.css", "xmrto-lens.css" ],
-    "js": [ "jquery-2.1.1.min.js", "jquery-ui.min.js", "jquery.dd.min.js", "qrcode.js", "xmrto-lens.js" ],
+    "js": [ "jquery-2.1.1.min.js", "jquery-ui.min.js", "qrcode.js", "xmrto-lens.js" ],
     "matches": [ "\u003Call_urls>" ]
   } ],
   "icons": {
@@ -22,5 +22,5 @@
      "default_title": "XMR.TO Lens has found Bitcoin addresses on this page."
   },
   "permissions": [ "https://xmr.to/" ],
-  "web_accessible_resources": [ "*.gif", "images/*", "*.png" ]
+  "web_accessible_resources": [ "*.gif", "*.png" ]
 }
