@@ -32,7 +32,6 @@ function show_error(msg) {
             "<span class='ui-state-error-text xmrto-error-text'>" + msg + "</span>" +
         "</div>"
     );
-    $("#xmrto-lens-modal").dialog("option", "buttons", []);
 }
 
 function show_success(msg) {
