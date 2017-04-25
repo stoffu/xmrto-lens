@@ -7,6 +7,7 @@
     "message": "XMR.TO Lens has found Bitcoin addresses on this page.",
     "description": "Message shown over the Omnibox icon when Bitcoin addresses are found in the current page."
   },
+  "tooltip" : { "message": "Click to send Monero to this Bitcoin address" },
   "success_header": { "message": "Success!" },
   "status": { "message": "Status" },
   "min": { "message": "Min" },

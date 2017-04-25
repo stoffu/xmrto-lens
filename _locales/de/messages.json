@@ -5,6 +5,7 @@
   "manifest_default_title": {
     "message": "XMR.TO Lens hat Bitcoin Adressen auf dieser Seite gefunden."
   },
+  "tooltip" : { "message": "Klicken Sie hier, um Monero an diese Bitcoin Adresse zu senden" },
   "success_header": { "message": "Erfolg!" },
   "rate": { "message": "Satz" },
   "destination": { "message": "Ziel" },
