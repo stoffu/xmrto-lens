@@ -159,7 +159,8 @@ function inject_modal() {
                                 "monero:" + xmr_receiving_address +
                                 "?tx_payment_id=" + xmr_required_payment_id +
                                 "&tx_amount=" + xmr_amount_remaining +
-                                "&recipient_name=XMR.TO";
+                                "&recipient_name=XMR.TO" +
+                                "&tx_description=Paying%20" + btc_amount + "%20BTC%20to%20" + btc_dest_address;
                             new QRCode(document.getElementById("xmrto-qrcode"), qrstring);
 
                             if (state == "UNDERPAID") {
