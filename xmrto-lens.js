@@ -53,6 +53,9 @@ function show_status(msg) {
 var spinner = '<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
 var interval_id;
 var already_injected = false;
+var btc_amount;
+var lower_limit;
+var upper_limit;
 
 function inject_modal() {
     if(already_injected) {
@@ -74,17 +77,18 @@ function inject_modal() {
             "<div>" +
                 "<span class='text-white'>" + chrome.i18n.getMessage("amount_in_bitcoin") + ":</span>" +
                 "<input class='xmrto-amount xmrto-form-control' type=number></input>" +
-                "<button class='xmrto-pay-button width-30 pull-right'>" + chrome.i18n.getMessage("pay") + "</button>" +
+                "<button class='xmrto-pay-button width-30 pull-right' disabled>" + chrome.i18n.getMessage("pay") + "</button>" +
             "</div>" +
         "</div>" +
     "</div>"
     );
 
+    $("#xmrto-lens-modal .xmrto-amount").on("input", function() {
+        btc_amount = $("#xmrto-lens-modal .xmrto-amount").val()
+        $("#xmrto-lens-modal .xmrto-pay-button").prop("disabled", btc_amount < lower_limit || upper_limit < btc_amount);
+    });
+
     $("#xmrto-lens-modal .xmrto-pay-button").click(function(event) {
-        var btc_amount = $("#xmrto-lens-modal .xmrto-amount").val()
-        if (!btc_amount) {
-            return;
-        }
 
         var btc_dest_address = $("#xmrto-lens-modal .xmrto-address").val();
 
@@ -241,6 +245,8 @@ function inject_modal() {
             show_error("XMR.TO API returned an error: " + response.error_msg);
             return;
         }
+        lower_limit = response.lower_limit;
+        upper_limit = response.upper_limit;
         $("#xmrto-lens-modal .xmrto-min-limit").text(response.lower_limit + " BTC");
         $("#xmrto-lens-modal .xmrto-max-limit").text(response.upper_limit + " BTC");
         $("#xmrto-lens-modal .xmrto-rate").text("1 XMR = " + response.price + " BTC");
