@@ -46,8 +46,11 @@ function show_success(msg) {
     );
 }
 
-function show_status(msg) {
-    $("#xmrto-lens-modal .xmrto-status").html(chrome.i18n.getMessage("status") + ": <span class='text-white'>" + msg + "</span>");
+function show_status(msg, uuid) {
+    $("#xmrto-lens-modal .xmrto-status").html(
+        "<div class='pull-left'>" + chrome.i18n.getMessage("status") + ": <span class='text-white'>" + msg + "</span></div>" +
+        "<div class='pull-left'>" + chrome.i18n.getMessage("orderkey") + ": <span class='text-white'>" + uuid + "</span></div>"
+    );
 }
 
 var spinner = '<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
@@ -184,19 +187,19 @@ function inject_modal() {
 
                         switch (state) {
                             case "TO_BE_CREATED":
-                                show_status(chrome.i18n.getMessage("state_tobecreated") + " " + spinner);
+                                show_status(chrome.i18n.getMessage("state_tobecreated") + " " + spinner, order_create_res.uuid);
                                 break;
                             case "UNPAID":
-                                show_status(chrome.i18n.getMessage("state_unpaid") + " " + spinner);
+                                show_status(chrome.i18n.getMessage("state_unpaid") + " " + spinner, order_create_res.uuid);
                                 break;
                             case "UNDERPAID":
-                                show_status(chrome.i18n.getMessage("state_underpaid") + " " + spinner);
+                                show_status(chrome.i18n.getMessage("state_underpaid") + " " + spinner, order_create_res.uuid);
                                 break;
                             case "PAID_UNCONFIRMED":
-                                show_status(chrome.i18n.getMessage("state_unconfirmed") + " " + spinner);
+                                show_status(chrome.i18n.getMessage("state_unconfirmed") + " " + spinner, order_create_res.uuid);
                                 break;
                             case "PAID":
-                                show_status(chrome.i18n.getMessage("state_paid") + " " + spinner);
+                                show_status(chrome.i18n.getMessage("state_paid") + " " + spinner, order_create_res.uuid);
                                 break;
                             case "BTC_SENT":
                                 show_success(
