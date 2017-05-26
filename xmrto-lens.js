@@ -147,7 +147,7 @@ function inject_modal() {
                             "<div class='text-white'>" + order_create_res.uuid + "</div>" +
                             "<div class='vspace-10'></div>" +
                             "<div>" + chrome.i18n.getMessage("commandline") + ":</div>" +
-                            "<div class='text-xxsmall'><textarea class='width-100' style='height:40px' onclick='this.select()'>transfer 4 " + xmr_receiving_address + " " + xmr_amount_remaining + " " + xmr_required_payment_id + "</textarea></div>" +
+                            "<div class='text-xxsmall'><textarea class='width-100' style='height:40px' onclick='this.select()'>transfer normal 4 " + xmr_receiving_address + " " + xmr_amount_remaining + " " + xmr_required_payment_id + "</textarea></div>" +
                             "<div class='vspace-10'></div>" +
                             "<div>" + chrome.i18n.getMessage("qrcode") + ":</div>" +
                             "<div id='xmrto-qrcode'></div>" +
