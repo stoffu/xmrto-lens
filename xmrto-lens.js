@@ -49,7 +49,8 @@ function show_success(msg) {
 function show_status(msg, uuid) {
     $("#xmrto-lens-modal .xmrto-status").html(
         "<div class='pull-left'>" + chrome.i18n.getMessage("status") + ": <span class='text-white'>" + msg + "</span></div>" +
-        "<div class='pull-left'>" + chrome.i18n.getMessage("orderkey") + ": <span class='text-white'>" + uuid + "</span></div>"
+        (uuid === undefined ? "" :
+        "<div class='pull-left'>" + chrome.i18n.getMessage("orderkey") + ": <span class='text-white'>" + uuid + "</span></div>")
     );
 }
 
@@ -187,22 +188,25 @@ function inject_modal() {
 
                         switch (state) {
                             case "TO_BE_CREATED":
-                                show_status(chrome.i18n.getMessage("state_tobecreated") + " " + spinner, order_create_res.uuid);
+                                show_status(chrome.i18n.getMessage("state_tobecreated") + " " + spinner);
                                 break;
                             case "UNPAID":
-                                show_status(chrome.i18n.getMessage("state_unpaid") + " " + spinner, order_create_res.uuid);
+                                show_status(chrome.i18n.getMessage("state_unpaid") + " " + spinner);
                                 break;
                             case "UNDERPAID":
-                                show_status(chrome.i18n.getMessage("state_underpaid") + " " + spinner, order_create_res.uuid);
+                                show_status(chrome.i18n.getMessage("state_underpaid") + " " + spinner);
                                 break;
                             case "PAID_UNCONFIRMED":
                                 show_status(chrome.i18n.getMessage("state_unconfirmed") + " " + spinner, order_create_res.uuid);
                                 break;
                             case "PAID":
-                                show_status(chrome.i18n.getMessage("state_paid") + " " + spinner, order_create_res.uuid);
+                                show_status(chrome.i18n.getMessage("state_paid") + " " + spinner);
                                 break;
                             case "BTC_SENT":
                                 show_success(
+                                    "<div>" + chrome.i18n.getMessage("orderkey") + ":</div>" +
+                                    "<div class='text-white'>" + order_create_res.uuid + "</div>" +
+                                    "<div class='vspace-10'></div>" +
                                     "<div>" +
                                         "<span class='text-white'>" + xmr_required_amount + " XMR</span> " +
                                         chrome.i18n.getMessage("success_part1") + " <span class='text-white'>" + btc_amount + " BTC</span> " +
