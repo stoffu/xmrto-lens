@@ -128,6 +128,7 @@ function inject_modal() {
                         var xmr_amount_remaining            = order_status_query_res.xmr_amount_remaining;
                         var xmr_num_confirmations_remaining = order_status_query_res.xmr_num_confirmations_remaining;
                         var xmr_receiving_address           = order_status_query_res.xmr_receiving_address;
+                        var xmr_receiving_integrated_address = order_status_query_res.xmr_receiving_integrated_address;
                         var xmr_required_amount             = order_status_query_res.xmr_required_amount;
                         var xmr_required_payment_id         = order_status_query_res.xmr_required_payment_id;
 
@@ -137,9 +138,9 @@ function inject_modal() {
                         var panel_body =
                         "<div class='xmrto-panel-body'>" +
                             "<div>" + chrome.i18n.getMessage("send_pre") + " <span class='xmrto-remaining-amount text-white'></span> " + chrome.i18n.getMessage("send_post") +":<div>" +
-                            "<div class='text-white text-xsmall'>" + xmr_receiving_address + "</div>" + 
-                            "<div>" + chrome.i18n.getMessage("paymentid") + " <span class='text-white'>" + xmr_required_payment_id + "</span><div>" +
-                            "<div class='text-small text-bold text-orange'>" + chrome.i18n.getMessage("caution") + "</div>" +
+                            "<div class='text-white' style='word-wrap: break-word'>" + xmr_receiving_integrated_address + "</div>" + 
+                            // "<div>" + chrome.i18n.getMessage("paymentid") + " <span class='text-white'>" + xmr_required_payment_id + "</span><div>" +
+                            // "<div class='text-small text-bold text-orange'>" + chrome.i18n.getMessage("caution") + "</div>" +
                             "<div class='vspace-20'></div>" +
                             "<div>" + chrome.i18n.getMessage("convert_pre") + " <span class='text-white'>" + btc_amount + "</span> " + chrome.i18n.getMessage("convert_post") + "</div>" +
                             "<div class='text-white'>" + btc_dest_address + "</div>" +
@@ -148,7 +149,7 @@ function inject_modal() {
                             "<div class='text-white'>" + order_create_res.uuid + "</div>" +
                             "<div class='vspace-10'></div>" +
                             "<div>" + chrome.i18n.getMessage("commandline") + ":</div>" +
-                            "<div class='text-xxsmall'><textarea class='width-100' style='height:40px' onclick='this.select()'>transfer normal 4 " + xmr_receiving_address + " " + xmr_amount_remaining + " " + xmr_required_payment_id + "</textarea></div>" +
+                            "<div class='text-xsmall'><textarea class='width-100' style='height:60px' onclick='this.select()'>transfer normal 4 " + xmr_receiving_integrated_address + " " + xmr_amount_remaining + "</textarea></div>" +
                             "<div class='vspace-10'></div>" +
                             "<div>" + chrome.i18n.getMessage("qrcode") + ":</div>" +
                             "<div id='xmrto-qrcode'></div>" +
