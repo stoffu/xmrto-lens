@@ -165,9 +165,8 @@ function inject_modal() {
                             $("#xmrto-lens-modal").html(panel_body + status_outer);
 
                             var qrstring =
-                                "monero:" + xmr_receiving_address +
-                                "?tx_payment_id=" + xmr_required_payment_id +
-                                "&tx_amount=" + xmr_amount_remaining +
+                                "monero:" + xmr_receiving_integrated_address +
+                                "?tx_amount=" + xmr_amount_remaining +
                                 "&recipient_name=XMR.TO" +
                                 "&tx_description=Paying%20" + btc_amount + "%20BTC%20to%20" + btc_dest_address;
                             new QRCode(document.getElementById("xmrto-qrcode"), qrstring);
