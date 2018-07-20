@@ -101,7 +101,7 @@ function inject_modal() {
             btc_dest_address: btc_dest_address
         };
         $("#xmrto-lens-modal").html("<span class='hspace-10'></span>" + chrome.i18n.getMessage("calling_api") + spinner);
-        $.post("https://xmr.to/api/v1/xmr2btc/order_create/", order_create_param).done(function(order_create_res) {
+        $.post("https://xmr.to/api/v2/xmr2btc/order_create/", order_create_param).done(function(order_create_res) {
             if(order_create_res.error) {
                 show_error(order_create_res.error_msg);
                 return;
@@ -115,7 +115,7 @@ function inject_modal() {
                 }
                 // cehck the satus every 5 seconds
                 if(ticks % 5 == 0) {
-                    $.post("https://xmr.to/api/v1/xmr2btc/order_status_query/", { uuid: order_create_res.uuid } ).done(function(order_status_query_res) {
+                    $.post("https://xmr.to/api/v2/xmr2btc/order_status_query/", { uuid: order_create_res.uuid } ).done(function(order_status_query_res) {
                         if (order_status_query_res.error) {
                             show_error(order_status_query_res.error_msg);
                             clearInterval(interval_id);
@@ -247,7 +247,7 @@ function inject_modal() {
     $("#xmrto-lens-modal .xmrto-min-limit").html(spinner);
     $("#xmrto-lens-modal .xmrto-max-limit").html(spinner);
     $("#xmrto-lens-modal .xmrto-rate").html(spinner);
-    $.get("https://xmr.to/api/v1/xmr2btc/order_parameter_query/", function(response) {
+    $.get("https://xmr.to/api/v2/xmr2btc/order_parameter_query/", function(response) {
         if(response.error) {
             show_error("XMR.TO API returned an error: " + response.error_msg);
             return;
