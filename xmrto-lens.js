@@ -83,6 +83,7 @@ function inject_modal() {
                 "<input class='xmrto-amount xmrto-form-control' type=number></input>" +
                 "<button class='xmrto-pay-button width-30 pull-right' disabled>" + chrome.i18n.getMessage("pay") + "</button>" +
             "</div>" +
+            "<div class='xmrto-estimation-time'>Orders up to <span class='xmrto-estimation-amount'></span> will be sent out instantly.</div>" +
         "</div>" +
     "</div>"
     );
@@ -126,11 +127,8 @@ function inject_modal() {
                         var btc_transaction_id              = order_status_query_res.btc_transaction_id;
                         var xmr_amount_total                = order_status_query_res.xmr_amount_total;
                         var xmr_amount_remaining            = order_status_query_res.xmr_amount_remaining;
-                        var xmr_num_confirmations_remaining = order_status_query_res.xmr_num_confirmations_remaining;
-                        var xmr_receiving_address           = order_status_query_res.xmr_receiving_address;
                         var xmr_receiving_integrated_address = order_status_query_res.xmr_receiving_integrated_address;
                         var xmr_required_amount             = order_status_query_res.xmr_required_amount;
-                        var xmr_required_payment_id         = order_status_query_res.xmr_required_payment_id;
 
                         state                = order_status_query_res.state;
                         seconds_till_timeout = order_status_query_res.seconds_till_timeout;
@@ -247,13 +245,15 @@ function inject_modal() {
     $("#xmrto-lens-modal .xmrto-min-limit").html(spinner);
     $("#xmrto-lens-modal .xmrto-max-limit").html(spinner);
     $("#xmrto-lens-modal .xmrto-rate").html(spinner);
-    $.get("https://xmr.to/api/v2/xmr2btc/order_parameter_query/", function(response) {
+    $.get("https://xmr.to/api/v1/xmr2btc/order_parameter_query/", function(response) {
         if(response.error) {
             show_error("XMR.TO API returned an error: " + response.error_msg);
             return;
         }
+        console.log(response);
         lower_limit = response.lower_limit;
         upper_limit = response.upper_limit;
+        $("#xmrto-lens-modal .xmrto-estimation-amount").text(response.zero_conf_max_amount + " BTC");
         $("#xmrto-lens-modal .xmrto-min-limit").text(response.lower_limit + " BTC");
         $("#xmrto-lens-modal .xmrto-max-limit").text(response.upper_limit + " BTC");
         $("#xmrto-lens-modal .xmrto-rate").text("1 XMR = " + response.price + " BTC");
