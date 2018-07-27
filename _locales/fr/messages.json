@@ -40,5 +40,7 @@
   "success_txid": { "message": "Identifiant de la transaction" },
   "success_numconfirm": { "message": "Nombre de confirmations" },
   "state_timedout": { "message": "L'ordre a expiré avant que le paiment n'ai été effectué" },
-  "state_notfound": { "message": "L'order n'a pas été trouvé dans le système" }
+  "state_notfound": { "message": "L'order n'a pas été trouvé dans le système" },
+  "estimation_pre": { "message": "Les commandes jusqu'à" },
+  "estimation_post": { "message": "seront envoyées instantanément." }
 }

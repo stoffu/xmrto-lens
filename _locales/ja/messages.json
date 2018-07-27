@@ -38,5 +38,7 @@
   "success_txid": { "message": "取引ID" },
   "success_numconfirm": { "message": "承認の数" },
   "state_timedout": { "message": "この注文は送金が完了しなかったため失効しました" },
-  "state_notfound": { "message": "この注文がシステム上で見つかりませんでした" }
+  "state_notfound": { "message": "この注文がシステム上で見つかりませんでした" },
+  "estimation_pre": { "message": "最大" },
+  "estimation_post": { "message": "の注文が即座に発送されます。" }
 }

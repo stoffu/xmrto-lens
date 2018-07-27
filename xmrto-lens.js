@@ -83,7 +83,7 @@ function inject_modal() {
                 "<input class='xmrto-amount xmrto-form-control' type=number></input>" +
                 "<button class='xmrto-pay-button width-30 pull-right' disabled>" + chrome.i18n.getMessage("pay") + "</button>" +
             "</div>" +
-            "<div class='xmrto-estimation-time'>Orders up to <span class='xmrto-estimation-amount'></span> will be sent out instantly.</div>" +
+            "<div class='xmrto-estimation-time'>" + chrome.i18n.getMessage("estimation_pre") + " <span class='xmrto-estimation-amount'></span> " + chrome.i18n.getMessage("estimation_post") + " </div>" +
         "</div>" +
     "</div>"
     );

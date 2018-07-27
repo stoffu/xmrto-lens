@@ -35,5 +35,7 @@
   "success_txid": { "message": "Transaktions-ID" },
   "success_numconfirm": { "message": "Anzahl der Bestätigungen" },
   "state_timedout": { "message": "Auftrag wurde abgelaufen, bevor die Zahlung abgeschlossen war" },
-  "state_notfound": { "message": "Auftrag wurde im System nicht gefunden" }
+  "state_notfound": { "message": "Auftrag wurde im System nicht gefunden" },
+  "estimation_pre": { "message": "Bestellingen van maximaal" },
+  "estimation_post": { "message": "worden onmiddellijk verzonden." }
 }
