@@ -245,7 +245,7 @@ function inject_modal() {
     $("#xmrto-lens-modal .xmrto-min-limit").html(spinner);
     $("#xmrto-lens-modal .xmrto-max-limit").html(spinner);
     $("#xmrto-lens-modal .xmrto-rate").html(spinner);
-    $.get("https://xmr.to/api/v1/xmr2btc/order_parameter_query/", function(response) {
+    $.get("https://xmr.to/api/v2/xmr2btc/order_parameter_query/", function(response) {
         if(response.error) {
             show_error("XMR.TO API returned an error: " + response.error_msg);
             return;
