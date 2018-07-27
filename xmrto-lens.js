@@ -250,7 +250,6 @@ function inject_modal() {
             show_error("XMR.TO API returned an error: " + response.error_msg);
             return;
         }
-        console.log(response);
         lower_limit = response.lower_limit;
         upper_limit = response.upper_limit;
         $("#xmrto-lens-modal .xmrto-estimation-amount").text(response.zero_conf_max_amount + " BTC");
