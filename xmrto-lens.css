@@ -105,6 +105,13 @@ input[type=number]::-webkit-outer-spin-button {
   width: 70% !important;
 }
 
+.xmrto-panel-body .xmrto-estimation-time {
+  margin-left: 160px;
+  margin-top: 15px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
 .xmrto-panel-body .xmrto-amount {
   margin-left: 30px;
   width: 35% !important;

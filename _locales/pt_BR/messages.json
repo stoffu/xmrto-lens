@@ -40,5 +40,7 @@
   "success_txid": { "message": "Transaction ID" },
   "success_numconfirm": { "message": "Número de confirmações" },
   "state_timedout": { "message": "Tempo do pedido expirou antes dele ser concluído" },
-  "state_notfound": { "message": "Pedido não encontrado no sistema" }
+  "state_notfound": { "message": "Pedido não encontrado no sistema" },
+  "estimation_pre": { "message": "Beställningar upp till" },
+  "estimation_post": { "message": "skickas ut direkt." }
 }

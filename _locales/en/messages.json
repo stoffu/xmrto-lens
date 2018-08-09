@@ -41,5 +41,7 @@
   "success_txid": { "message": "Transaction ID" },
   "success_numconfirm": { "message": "Number of confirmations" },
   "state_timedout": { "message": "Order timed out before payment was complete" },
-  "state_notfound": { "message": "Order wasn’t found in the system" }
+  "state_notfound": { "message": "Order wasn’t found in the system" },
+  "estimation_pre": { "message": "Orders up to" },
+  "estimation_post": { "message": "will be sent out instantly." }
 }
