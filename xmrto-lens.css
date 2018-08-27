@@ -215,6 +215,13 @@ input[type=number]::-webkit-outer-spin-button {
   animation-delay: -0.16s;
 }
 
+.stagenet-label {
+  display: none;
+  color: #ff3f00;
+  font-size: 14px;
+  margin-left: 160px;
+}
+
 @-webkit-keyframes bouncedelay {
   0%, 80%, 100% { -webkit-transform: scale(0.0) }
   40% { -webkit-transform: scale(1.0) }

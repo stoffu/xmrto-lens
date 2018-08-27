@@ -1,4 +1,4 @@
-var btc_regex = /\b[13][a-km-zA-HJ-NP-Z0-9]{26,33}\b/g;
+var btc_regex = /\b[123mn][a-km-zA-HJ-NP-Z0-9]{26,35}\b/g;
 
 function inject_lens_icon(node) {
     var next;
@@ -73,6 +73,7 @@ function inject_modal() {
             "<div class='pull-right'>" + chrome.i18n.getMessage("rate") + ": <span class='xmrto-rate text-white'></span></div>" +
         "</div>"+
         "<div class='xmrto-panel-body'>" +
+            "<div class='stagenet-label'>stagenet</div>" +
             "<div>" +
                 "<span class='text-white'>" + chrome.i18n.getMessage("destination") + ":</span>" +
                 "<input class='xmrto-address xmrto-form-control' disabled></input>" +
@@ -102,7 +103,7 @@ function inject_modal() {
             btc_dest_address: btc_dest_address
         };
         $("#xmrto-lens-modal").html("<span class='hspace-10'></span>" + chrome.i18n.getMessage("calling_api") + spinner);
-        $.post("https://xmr.to/api/v2/xmr2btc/order_create/", order_create_param).done(function(order_create_res) {
+        $.post(endpoint + "/xmr2btc/order_create/", order_create_param).done(function(order_create_res) {
             if(order_create_res.error) {
                 show_error(order_create_res.error_msg);
                 return;
@@ -116,7 +117,7 @@ function inject_modal() {
                 }
                 // cehck the satus every 5 seconds
                 if(ticks % 5 == 0) {
-                    $.post("https://xmr.to/api/v2/xmr2btc/order_status_query/", { uuid: order_create_res.uuid } ).done(function(order_status_query_res) {
+                    $.post(endpoint + "/xmr2btc/order_status_query/", { uuid: order_create_res.uuid } ).done(function(order_status_query_res) {
                         if (order_status_query_res.error) {
                             show_error(order_status_query_res.error_msg);
                             clearInterval(interval_id);
@@ -245,18 +246,6 @@ function inject_modal() {
     $("#xmrto-lens-modal .xmrto-min-limit").html(spinner);
     $("#xmrto-lens-modal .xmrto-max-limit").html(spinner);
     $("#xmrto-lens-modal .xmrto-rate").html(spinner);
-    $.get("https://xmr.to/api/v2/xmr2btc/order_parameter_query/", function(response) {
-        if(response.error) {
-            show_error("XMR.TO API returned an error: " + response.error_msg);
-            return;
-        }
-        lower_limit = response.lower_limit;
-        upper_limit = response.upper_limit;
-        $("#xmrto-lens-modal .xmrto-estimation-amount").text(response.zero_conf_max_amount + " BTC");
-        $("#xmrto-lens-modal .xmrto-min-limit").text(response.lower_limit + " BTC");
-        $("#xmrto-lens-modal .xmrto-max-limit").text(response.upper_limit + " BTC");
-        $("#xmrto-lens-modal .xmrto-rate").text("1 XMR = " + response.price + " BTC");
-    });
 
     already_injected = true; // only inject once
 }
@@ -284,12 +273,52 @@ function wrapMatchesInNode(textNode) {
 
 inject_lens_icon(document.body);
 
+var isTestNet, isProdNet;
+var endpoint = 'https://xmr.to/api/v2';
+
 $(function() {
     $("body").on("click", '.xmrto-lens-link', function(event) {
         // When the user clicks on one of the fox icons embedded on the page,
         // this function gets called which launches the modal.
         event.preventDefault();
         var address = $(this).data('address');
+
+        // detect wallet address type
+        isTestNet = validate(address, 'bitcoin', 'testnet');
+        isProdNet = validate(address, 'bitcoin', 'prod');
+
+        // change endpoint to use stagenet
+        if (isTestNet) {
+          endpoint = 'https://test.xmr.to/api/v2';
+        } else if (isProdNet) {
+          endpoint = 'https://xmr.to/api/v2';
+        } else {
+          // exit if address is not valid
+          return;
+        }
+
+        console.log('opening');
+
+      $.get(endpoint + "/xmr2btc/order_parameter_query/", function(response) {
+        if(response.error) {
+          show_error("XMR.TO API returned an error: " + response.error_msg);
+          return;
+        }
+
+        if (isTestNet) {
+          $('.stagenet-label').show();
+        } else {
+          $('.stagenet-label').hide();
+        }
+
+        lower_limit = response.lower_limit;
+        upper_limit = response.upper_limit;
+        $("#xmrto-lens-modal .xmrto-estimation-amount").text(response.zero_conf_max_amount + " BTC");
+        $("#xmrto-lens-modal .xmrto-min-limit").text(response.lower_limit + " BTC");
+        $("#xmrto-lens-modal .xmrto-max-limit").text(response.upper_limit + " BTC");
+        $("#xmrto-lens-modal .xmrto-rate").text("1 XMR = " + response.price + " BTC");
+      });
+
         $("#xmrto-lens-modal .xmrto-address").val(address);
         $("#xmrto-lens-modal").dialog({
             show: { effect: "fade", duration: 300 },
