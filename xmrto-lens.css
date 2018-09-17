@@ -92,12 +92,13 @@ input[type=number]::-webkit-outer-spin-button {
   background: #4C4C4C;
 }
 
-.xmrto-form-control {
+#xmrto-lens-modal .xmrto-form-control {
   border-radius: 4px;
   border:0;
   padding:12px 10px;
   background: #fff;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 .xmrto-panel-body .xmrto-address {
@@ -184,6 +185,15 @@ input[type=number]::-webkit-outer-spin-button {
 	top:4px;
 }
 
+.clearfix {}
+
+.clearfix:after {
+  content: '';
+  display: table;
+  width: 100%;
+  clear: both;
+}
+
 .spinner {
   margin: 0 auto;
   width: 70px;
@@ -216,7 +226,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .stagenet-label {
-  display: none;
   color: #ff3f00;
   font-size: 14px;
   margin-left: 160px;

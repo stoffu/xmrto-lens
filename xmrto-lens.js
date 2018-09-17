@@ -1,5 +1,5 @@
 var btc_regex = /\b[123mn][a-km-zA-HJ-NP-Z0-9]{26,35}\b/g;
-var pp_url = /(bitcoin:\?r=)?https:\/\/bitpay.com\/(invoice\?id=|i\/)\w+/g;
+var pp_regexp = /(bitcoin:\?r=)?https:\/\/bitpay.com\/(invoice\?id=|i\/)\w+/g;
 var endpoint = 'https://xmr.to/api/v2';
 var icon_url = chrome.extension.getURL("lens_icon_12.png");
 var is_prod_net;
@@ -19,9 +19,12 @@ function inject_lens_icon(node) {
         }
     } else if (node.nodeType === 3) {
         // (Text node)
-        if (btc_regex.test(node.data) || pp_url.test(node.data)) {
-            //console.log('found node with BTC addresses', node.parentNode.id);
-            wrapMatchesInNode(node);
+        if (btc_regex.test(node.data)) {
+            wrapMatchesInNode(node, btc_regex);
+            chrome.runtime.sendMessage({address_present: true});
+        }
+        if (pp_regexp.test(node.data)) {
+            wrapMatchesInNode(node, pp_regexp);
             chrome.runtime.sendMessage({address_present: true});
         }
     }
@@ -38,9 +41,9 @@ function show_error(msg) {
     );
 }
 
-function wrapMatchesInNode(textNode) {
+function wrapMatchesInNode(textNode, regexp) {
     var temp = document.createElement('div');
-    temp.innerHTML = textNode.data.replace(btc_regex, '$&<a class="xmrto-lens-link" href="#" data-address="$&"><img title="' + chrome.i18n.getMessage('tooltip') + '" src="' + icon_url + '"></a> ');
+    temp.innerHTML = textNode.data.replace(regexp, '$&<a class="xmrto-lens-link" href="#" data-address="$&"><img title="' + chrome.i18n.getMessage('tooltip') + '" src="' + icon_url + '"></a> ');
     // temp.innerHTML is now:
     // "\n    This order's reference number is <a href="/order/RF83297">RF83297</a>.\n"
     // |_______________________________________|__________________________________|___|
@@ -65,6 +68,7 @@ $(function () {
     // this function gets called which launches the modal.
     event.preventDefault();
     var address = $(this).data('address');
+    var isPP = pp_regexp.test(address);
 
     // detect wallet address type
     is_test_net = validate(address, 'bitcoin', 'testnet');
@@ -74,6 +78,9 @@ $(function () {
     if (is_test_net) {
       endpoint = 'https://test.xmr.to/api/v2';
     } else if (is_prod_net) {
+      endpoint = 'https://xmr.to/api/v2';
+    } else if (isPP) {
+      // use prod endpoint if it is payment protocol url
       endpoint = 'https://xmr.to/api/v2';
     } else {
       // exit if address is not valid
@@ -89,21 +96,16 @@ $(function () {
         return;
       }
 
-      if (is_test_net) {
-        $('.stagenet-label').show();
-      } else {
-        $('.stagenet-label').hide();
-      }
-
-      modal.inject_address_modal({
+      modal.inject_modal({
         zero_conf_max_amount: response.zero_conf_max_amount,
         lower_limit: response.lower_limit,
         upper_limit: response.upper_limit,
         price: response.upper_limit,
         address: address,
         endpoint: endpoint,
+        is_test_net: is_test_net,
+        isPP: isPP,
       });
-      // update modal data
     });
   });
 });
