@@ -1,5 +1,5 @@
 var btc_regex = /\b[123mn][a-km-zA-HJ-NP-Z0-9]{26,35}\b/g;
-var pp_regexp = /(bitcoin:\?r=)?https:\/\/bitpay.com\/(invoice\?id=|i\/)\w+/g;
+var pp_regexp = /(bitcoin:\?r=)?https:\/\/bitpay.com\/(invoice\?id=|i\/)\w+/;
 var endpoint = 'https://xmr.to/api/v2';
 var icon_url = chrome.extension.getURL("lens_icon_12.png");
 var is_prod_net;
@@ -69,7 +69,6 @@ $(function () {
     event.preventDefault();
     var address = $(this).data('address');
     var isPP = pp_regexp.test(address);
-
     // detect wallet address type
     is_test_net = validate(address, 'bitcoin', 'testnet');
     is_prod_net = validate(address, 'bitcoin', 'prod');
