@@ -51,144 +51,152 @@ var modal = {
       btc_dest_address: btc_dest_address
     };
     $("#xmrto-lens-modal").html("<span class='hspace-10'></span>" + chrome.i18n.getMessage("calling_api") + spinner);
-    $.post(url, order_create_param).done(function (order_create_res) {
-      if (order_create_res.error) {
-        self.show_error(order_create_res.error_msg);
-        return;
-      }
-      var ticks = 0;
-      var state;
-      var seconds_till_timeout;
-      interval_id = setInterval(function () {
-        if (seconds_till_timeout) {
-          seconds_till_timeout--;
+    $.post(url, order_create_param)
+      .done(function (order_create_res) {
+        if (order_create_res.error) {
+          self.show_error(order_create_res.error_msg);
+          return;
         }
-        // cehck the satus every 5 seconds
-        if (ticks % 5 === 0) {
-          $.post(endpoint + "/xmr2btc/order_status_query/", {uuid: order_create_res.uuid}).done(function (order_status_query_res) {
-            if (order_status_query_res.error) {
-              self.show_error(order_status_query_res.error_msg);
-              clearInterval(interval_id);
-              return;
-            }
-
-            var btc_num_confirmations = order_status_query_res.btc_num_confirmations;
-            var btc_transaction_id = order_status_query_res.btc_transaction_id;
-            var xmr_amount_total = order_status_query_res.xmr_amount_total;
-            var xmr_amount_remaining = order_status_query_res.xmr_amount_remaining;
-            var xmr_receiving_integrated_address = order_status_query_res.xmr_receiving_integrated_address;
-            var xmr_required_amount = order_status_query_res.xmr_required_amount;
-
-            state = order_status_query_res.state;
-            seconds_till_timeout = order_status_query_res.seconds_till_timeout;
-
-            var panel_body =
-              "<div class='xmrto-panel-body'>" +
-              "<div>" + chrome.i18n.getMessage("send_pre") + " <span class='xmrto-remaining-amount text-white'></span> " + chrome.i18n.getMessage("send_post") + ":<div>" +
-              "<div class='text-white' style='word-wrap: break-word'>" + xmr_receiving_integrated_address + "</div>" +
-              "<div class='vspace-20'></div>" +
-              "<div>" + chrome.i18n.getMessage("convert_pre") + " <span class='text-white'>" + self.btc_amount + "</span> " + chrome.i18n.getMessage("convert_post") + "</div>" +
-              "<div class='text-white'>" + btc_dest_address + "</div>" +
-              "<div class='vspace-10'></div>" +
-              "<div>" + chrome.i18n.getMessage("orderkey") + ":</div>" +
-              "<div class='text-white'>" + order_create_res.uuid + "</div>" +
-              "<div class='vspace-10'></div>" +
-              "<div>" + chrome.i18n.getMessage("commandline") + ":</div>" +
-              "<div class='text-xsmall'><textarea class='width-100' style='height:60px' onclick='self.select()'>transfer normal 4 " + xmr_receiving_integrated_address + " " + xmr_amount_remaining + "</textarea></div>" +
-              "<div class='vspace-10'></div>" +
-              "<div>" + chrome.i18n.getMessage("qrcode") + ":</div>" +
-              "<div id='xmrto-qrcode'></div>" +
-              "</div>";
-
-            var status_outer =
-              "<div class='xmrto-status-outer'>" +
-              "<div class='xmrto-status pull-left'></div>" +
-              "<div class='xmrto-timer pull-right'></div>" +
-              "</div>";
-
-            if (state === "UNPAID" || state === "UNDERPAID") {
-              $("#xmrto-lens-modal").html(panel_body + status_outer);
-
-              var qrstring =
-                "monero:" + xmr_receiving_integrated_address +
-                "?tx_amount=" + xmr_amount_remaining +
-                "&recipient_name=XMR.TO" +
-                "&tx_description=Paying%20" + self.btc_amount + "%20BTC%20to%20" + btc_dest_address;
-              new QRCode(document.getElementById("xmrto-qrcode"), qrstring);
-
-              if (state === "UNDERPAID") {
-                $("#xmrto-lens-modal .xmrto-remaining-amount").text(
-                  chrome.i18n.getMessage("remaining_pre") + " " + xmr_amount_remaining + " " +
-                  chrome.i18n.getMessage("remaining_mid") + " " + xmr_amount_total + " " +
-                  chrome.i18n.getMessage("remaining_post")
-                );
-              } else {
-                $("#xmrto-lens-modal .xmrto-remaining-amount").text(xmr_amount_remaining + " XMR");
+        var ticks = 0;
+        var state;
+        var seconds_till_timeout;
+        interval_id = setInterval(function () {
+          if (seconds_till_timeout) {
+            seconds_till_timeout--;
+          }
+          // cehck the satus every 5 seconds
+          if (ticks % 5 === 0) {
+            $.post(endpoint + "/xmr2btc/order_status_query/", {uuid: order_create_res.uuid}).done(function (order_status_query_res) {
+              if (order_status_query_res.error) {
+                self.show_error(order_status_query_res.error_msg);
+                clearInterval(interval_id);
+                return;
               }
 
-            } else {
-              // payment already received, so show the status only
-              $("#xmrto-lens-modal").html(status_outer);
-            }
+              var btc_num_confirmations = order_status_query_res.btc_num_confirmations;
+              var btc_transaction_id = order_status_query_res.btc_transaction_id;
+              var xmr_amount_total = order_status_query_res.xmr_amount_total;
+              var xmr_amount_remaining = order_status_query_res.xmr_amount_remaining;
+              var xmr_receiving_integrated_address = order_status_query_res.xmr_receiving_integrated_address;
+              var xmr_required_amount = order_status_query_res.xmr_required_amount;
 
-            switch (state) {
-              case "TO_BE_CREATED":
-                self.show_status(chrome.i18n.getMessage("state_tobecreated") + " " + spinner);
-                break;
-              case "UNPAID":
-                self.show_status(chrome.i18n.getMessage("state_unpaid") + " " + spinner);
-                break;
-              case "UNDERPAID":
-                self.show_status(chrome.i18n.getMessage("state_underpaid") + " " + spinner);
-                break;
-              case "PAID_UNCONFIRMED":
-                self.show_status(chrome.i18n.getMessage("state_unconfirmed") + " " + spinner, order_create_res.uuid);
-                break;
-              case "PAID":
-                self.show_status(chrome.i18n.getMessage("state_paid") + " " + spinner);
-                break;
-              case "BTC_SENT":
-                self.show_success(
-                  "<div>" + chrome.i18n.getMessage("orderkey") + ":</div>" +
-                  "<div class='text-white'>" + order_create_res.uuid + "</div>" +
-                  "<div class='vspace-10'></div>" +
-                  "<div>" +
-                  "<span class='text-white'>" + xmr_required_amount + " XMR</span> " +
-                  chrome.i18n.getMessage("success_part1") + " <span class='text-white'>" + self.btc_amount + " BTC</span> " +
-                  chrome.i18n.getMessage("success_part2") +
-                  " </div>" +
-                  "<div class='text-white'>" + btc_dest_address + "</div>" +
-                  "<div class='vspace-10'></div>" +
-                  "<div>" + chrome.i18n.getMessage("success_txid") + ":</div>" +
-                  "<div class='text-white text-small'>" + btc_transaction_id + "</div>" +
-                  "<div class='vspace-10'></div>" +
-                  "<div>" + chrome.i18n.getMessage("success_numconfirm") + ": <span class='text-white'>" + btc_num_confirmations + "</span></div>"
-                );
-                return;
-              case "TIMED_OUT":
-                self.show_error(chrome.i18n.getMessage("state_timedout"));
-                clearInterval(interval_id);
-                return;
-              case "NOT_FOUND":
-                self.show_error(chrome.i18n.getMessage("state_notfound"));
-                clearInterval(interval_id);
-                return;
-            }
-          });
+              state = order_status_query_res.state;
+              seconds_till_timeout = order_status_query_res.seconds_till_timeout;
+
+              var panel_body =
+                "<div class='xmrto-panel-body'>" +
+                "<div>" + chrome.i18n.getMessage("send_pre") + " <span class='xmrto-remaining-amount text-white'></span> " + chrome.i18n.getMessage("send_post") + ":<div>" +
+                "<div class='text-white' style='word-wrap: break-word'>" + xmr_receiving_integrated_address + "</div>" +
+                "<div class='vspace-20'></div>" +
+                "<div>" + chrome.i18n.getMessage("convert_pre") + " <span class='text-white'>" + self.btc_amount + "</span> " + chrome.i18n.getMessage("convert_post") + "</div>" +
+                "<div class='text-white'>" + btc_dest_address + "</div>" +
+                "<div class='vspace-10'></div>" +
+                "<div>" + chrome.i18n.getMessage("orderkey") + ":</div>" +
+                "<div class='text-white'>" + order_create_res.uuid + "</div>" +
+                "<div class='vspace-10'></div>" +
+                "<div>" + chrome.i18n.getMessage("commandline") + ":</div>" +
+                "<div class='text-xsmall'><textarea class='width-100' style='height:60px' onclick='self.select()'>transfer normal 4 " + xmr_receiving_integrated_address + " " + xmr_amount_remaining + "</textarea></div>" +
+                "<div class='vspace-10'></div>" +
+                "<div>" + chrome.i18n.getMessage("qrcode") + ":</div>" +
+                "<div id='xmrto-qrcode'></div>" +
+                "</div>";
+
+              var status_outer =
+                "<div class='xmrto-status-outer'>" +
+                "<div class='xmrto-status pull-left'></div>" +
+                "<div class='xmrto-timer pull-right'></div>" +
+                "</div>";
+
+              if (state === "UNPAID" || state === "UNDERPAID") {
+                $("#xmrto-lens-modal").html(panel_body + status_outer);
+
+                var qrstring =
+                  "monero:" + xmr_receiving_integrated_address +
+                  "?tx_amount=" + xmr_amount_remaining +
+                  "&recipient_name=XMR.TO" +
+                  "&tx_description=Paying%20" + self.btc_amount + "%20BTC%20to%20" + btc_dest_address;
+                new QRCode(document.getElementById("xmrto-qrcode"), qrstring);
+
+                if (state === "UNDERPAID") {
+                  $("#xmrto-lens-modal .xmrto-remaining-amount").text(
+                    chrome.i18n.getMessage("remaining_pre") + " " + xmr_amount_remaining + " " +
+                    chrome.i18n.getMessage("remaining_mid") + " " + xmr_amount_total + " " +
+                    chrome.i18n.getMessage("remaining_post")
+                  );
+                } else {
+                  $("#xmrto-lens-modal .xmrto-remaining-amount").text(xmr_amount_remaining + " XMR");
+                }
+
+              } else {
+                // payment already received, so show the status only
+                $("#xmrto-lens-modal").html(status_outer);
+              }
+
+              switch (state) {
+                case "TO_BE_CREATED":
+                  self.show_status(chrome.i18n.getMessage("state_tobecreated") + " " + spinner);
+                  break;
+                case "UNPAID":
+                  self.show_status(chrome.i18n.getMessage("state_unpaid") + " " + spinner);
+                  break;
+                case "UNDERPAID":
+                  self.show_status(chrome.i18n.getMessage("state_underpaid") + " " + spinner);
+                  break;
+                case "PAID_UNCONFIRMED":
+                  self.show_status(chrome.i18n.getMessage("state_unconfirmed") + " " + spinner, order_create_res.uuid);
+                  break;
+                case "PAID":
+                  self.show_status(chrome.i18n.getMessage("state_paid") + " " + spinner);
+                  break;
+                case "BTC_SENT":
+                  self.show_success(
+                    "<div>" + chrome.i18n.getMessage("orderkey") + ":</div>" +
+                    "<div class='text-white'>" + order_create_res.uuid + "</div>" +
+                    "<div class='vspace-10'></div>" +
+                    "<div>" +
+                    "<span class='text-white'>" + xmr_required_amount + " XMR</span> " +
+                    chrome.i18n.getMessage("success_part1") + " <span class='text-white'>" + self.btc_amount + " BTC</span> " +
+                    chrome.i18n.getMessage("success_part2") +
+                    " </div>" +
+                    "<div class='text-white'>" + btc_dest_address + "</div>" +
+                    "<div class='vspace-10'></div>" +
+                    "<div>" + chrome.i18n.getMessage("success_txid") + ":</div>" +
+                    "<div class='text-white text-small'>" + btc_transaction_id + "</div>" +
+                    "<div class='vspace-10'></div>" +
+                    "<div>" + chrome.i18n.getMessage("success_numconfirm") + ": <span class='text-white'>" + btc_num_confirmations + "</span></div>"
+                  );
+                  return;
+                case "TIMED_OUT":
+                  self.show_error(chrome.i18n.getMessage("state_timedout"));
+                  clearInterval(interval_id);
+                  return;
+                case "NOT_FOUND":
+                  self.show_error(chrome.i18n.getMessage("state_notfound"));
+                  clearInterval(interval_id);
+                  return;
+              }
+            });
+          }
+
+          if (state === "UNPAID" || state === "UNDERPAID") {
+            var minutes = Math.floor(seconds_till_timeout / 60);
+            var seconds = seconds_till_timeout - minutes * 60;
+            var timeText = (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+            $("#xmrto-lens-modal .xmrto-timer").text(chrome.i18n.getMessage("expire_pre") + " " + timeText + " " + chrome.i18n.getMessage("expire_post"));
+          }
+
+          ticks++;
+        }, 1000);
+      })
+      .fail(function (err) {
+        if (err.responseJSON) {
+          self.show_error(err.responseJSON.error_msg);
+          return;
         }
-
-        if (state === "UNPAID" || state === "UNDERPAID") {
-          var minutes = Math.floor(seconds_till_timeout / 60);
-          var seconds = seconds_till_timeout - minutes * 60;
-          var timeText = (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-          $("#xmrto-lens-modal .xmrto-timer").text(chrome.i18n.getMessage("expire_pre") + " " + timeText + " " + chrome.i18n.getMessage("expire_post"));
-        }
-
-        ticks++;
-      }, 1000);
-    });
+      });
   },
   inject_modal: function (data) {
+    var self = this;
     var zero_conf_max_amount = data.zero_conf_max_amount;
     var lower_limit = data.lower_limit;
     var upper_limit = data.upper_limit;
@@ -226,6 +234,8 @@ var modal = {
           "<div class='pull-right'>" + chrome.i18n.getMessage("rate") + ": <span class='xmrto-rate text-white'>" + "1 XMR = " + price + " BTC" + "</span></div>" +
         "</div>" +
         "<div class='xmrto-panel-body'>" +
+          "<div>Before you press \"Pay\", confirm the email address in the BitPay modal dialog</div>" +
+          "<div class='vspace-20'></div>" +
           "<div>" +
             "<span class='text-white'>" + chrome.i18n.getMessage("destination") + ":</span>" +
             "<input class='xmrto-address xmrto-form-control' value=" + address + " disabled />" +
@@ -244,7 +254,7 @@ var modal = {
     this.on_input(lower_limit, upper_limit);
     // on 'Pay' button click
     $("#xmrto-lens-modal .xmrto-pay-button").click(function () {
-      this.on_submit(endpoint, address, isPP);
+      self.on_submit(endpoint, address, isPP);
     });
 
     // open modal dialog
