@@ -30,17 +30,6 @@ function inject_lens_icon(node) {
     }
 }
 
-function show_error(msg) {
-    // At any point in the process, if the XMR.TO api returns any kind of error,
-    // this text gets placed into the page.
-    $("#xmrto-lens-modal").html(
-        "<div class='ui-state-error ui-corner-all xmrto-error'>" +
-            "XMR.TO API returned an Error:<br><br>" +
-            "<span class='ui-state-error-text xmrto-error-text'>" + msg + "</span>" +
-        "</div>"
-    );
-}
-
 function wrapMatchesInNode(textNode, regexp) {
     var temp = document.createElement('div');
     temp.innerHTML = textNode.data.replace(regexp, '$&<a class="xmrto-lens-link" href="#" data-address="$&"><img title="' + chrome.i18n.getMessage('tooltip') + '" src="' + icon_url + '"></a> ');
@@ -91,11 +80,6 @@ function openModal(event, url) {
 
   // request order parameters
   $.get(endpoint + "/xmr2btc/order_parameter_query/", function (response) {
-    if (response.error) {
-      show_error("XMR.TO API returned an error: " + response.error_msg);
-      return;
-    }
-
     modal.inject_modal({
       zero_conf_max_amount: response.zero_conf_max_amount,
       lower_limit: response.lower_limit,
@@ -105,6 +89,7 @@ function openModal(event, url) {
       endpoint: endpoint,
       is_test_net: is_test_net,
       isPP: isPP,
+      error: response.error_msg,
     });
   });
 }

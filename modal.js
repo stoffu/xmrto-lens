@@ -206,6 +206,7 @@ var modal = {
     var address = data.address;
     var endpoint = data.endpoint;
     var isPP = data.isPP;
+    var error = data.error;
     var address_html =
       "<div id='xmrto-lens-modal' class='modal-container'>" +
         "<div class='xmrto-panel-header'>" +
@@ -269,5 +270,8 @@ var modal = {
         clearInterval(interval_id);
       },
     });
+    if (error) {
+      self.show_error(error);
+    }
   }
 };
