@@ -79,6 +79,7 @@ var modal = {
               var xmr_amount_remaining = order_status_query_res.xmr_amount_remaining;
               var xmr_receiving_integrated_address = order_status_query_res.xmr_receiving_integrated_address;
               var xmr_required_amount = order_status_query_res.xmr_required_amount;
+              var btc_amount = order_status_query_res.btc_amount;
 
               state = order_status_query_res.state;
               seconds_till_timeout = order_status_query_res.seconds_till_timeout;
@@ -88,7 +89,7 @@ var modal = {
                 "<div>" + chrome.i18n.getMessage("send_pre") + " <span class='xmrto-remaining-amount text-white'></span> " + chrome.i18n.getMessage("send_post") + ":<div>" +
                 "<div class='text-white' style='word-wrap: break-word'>" + xmr_receiving_integrated_address + "</div>" +
                 "<div class='vspace-20'></div>" +
-                "<div>" + chrome.i18n.getMessage("convert_pre") + " <span class='text-white'>" + self.btc_amount + "</span> " + chrome.i18n.getMessage("convert_post") + "</div>" +
+                "<div>" + chrome.i18n.getMessage("convert_pre") + " <span class='text-white'>" + btc_amount + "</span> " + chrome.i18n.getMessage("convert_post") + "</div>" +
                 "<div class='text-white'>" + btc_dest_address + "</div>" +
                 "<div class='vspace-10'></div>" +
                 "<div>" + chrome.i18n.getMessage("orderkey") + ":</div>" +
