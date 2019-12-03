@@ -1,9 +1,9 @@
 {
   "manifest_description": {
-    "message": "XMR.toを使って、ビットコインアドレスにモネロを送金します"
+    "message": "AEON.toを使って、ビットコインアドレスにAEONを送金します"
   },
   "manifest_default_title": {
-    "message": "XMR.to Lensはこのページ上にビットコインアドレスを発見しました。"
+    "message": "AEON.to Lensはこのページ上にビットコインアドレスを発見しました。"
   },
   "success_header": { "message": "成功!" },
   "status": { "message": "状態" },
@@ -13,24 +13,24 @@
   "destination": { "message": "送金先" },
   "amount_in_bitcoin": { "message": "ビットコインの額" },
   "pay": { "message": "支払う" },
-  "calling_api": { "message": "XMR.toのAPIを呼び出しています " },
+  "calling_api": { "message": "AEON.toのAPIを呼び出しています " },
   "send_pre": { "message": "" },
   "send_post": { "message": "を以下のアドレスに送金してください" },
   "paymentid": { "message": "その際、以下のペイメントIDを添付してください:" },
   "caution": { "message": "ペイメントIDを添付するのを忘れないでください!" },
-  "convert_pre": { "message": "送金されたモネロは" },
+  "convert_pre": { "message": "送金されたAEONは" },
   "convert_post": { "message": "BTC に変換され、以下のアドレスに送金されます:" },
   "orderkey": { "message": "この注文の秘密のキー" },
   "commandline": { "message": "コマンドライン" },
   "qrcode": { "message": "QRコード" },
   "remaining_pre": { "message": "残りの" },
-  "remaining_mid": { "message": "XMR (合計" },
-  "remaining_post": { "message": "XMR)" },
+  "remaining_mid": { "message": "AEON (合計" },
+  "remaining_post": { "message": "AEON)" },
   "expire_pre": { "message": "あと" },
   "expire_post": { "message": "で失効" },
   "state_tobecreated": { "message": "注文を受付中" },
-  "state_unpaid": { "message": "モネロの送金を待っています" },
-  "state_underpaid": { "message": "残りのモネロの送金を待っています" },
+  "state_unpaid": { "message": "AEONの送金を待っています" },
+  "state_underpaid": { "message": "残りのAEONの送金を待っています" },
   "state_unconfirmed": { "message": "送金を受け付けました! 承認を待っています" },
   "state_paid": { "message": "送金は受け付けられ承認されました! ビットコインを送金しています" },
   "success_part1": { "message": "は" },

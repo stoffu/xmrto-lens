@@ -1,13 +1,13 @@
 {
   "manifest_description": {
-    "message": "Skicka Monero till en Bitcoin adress genom att använda XMR.to",
-    "description": "The description of what XMR.to Lens is. Displayed in the web store."
+    "message": "Skicka AEON till en Bitcoin adress genom att använda AEON.to",
+    "description": "The description of what AEON.to Lens is. Displayed in the web store."
   },
   "manifest_default_title": {
-    "message": "XMR.to Lens har hittat Bitcoin-adresser på denna sida.",
+    "message": "AEON.to Lens har hittat Bitcoin-adresser på denna sida.",
     "description": "Message shown over the Omnibox icon when Bitcoin addresses are found in the current page."
   },
-  "tooltip" : { "message": "Klicka för att skicka Monero till denna Bitcoin-adress" },
+  "tooltip" : { "message": "Klicka för att skicka AEON till denna Bitcoin-adress" },
   "success_header": { "message": "Lyckades!" },
   "status": { "message": "Status" },
   "min": { "message": "Min" },
@@ -16,7 +16,7 @@
   "destination": { "message": "Mottagare" },
   "amount_in_bitcoin": { "message": "Belopp i Bitcoin" },
   "pay": { "message": "Betala" },
-  "calling_api": { "message": "Anropar XMR.to:s API... " },
+  "calling_api": { "message": "Anropar AEON.to:s API... " },
   "send_pre": { "message": "Sicka" },
   "send_post": { "message": "till" },
   "paymentid": { "message": "Med betalnings-ID" },
@@ -27,13 +27,13 @@
   "commandline": { "message": "Kommandorad" },
   "qrcode": { "message": "QR-kod" },
   "remaining_pre": { "message": "återstående" },
-  "remaining_mid": { "message": "XMR (totalt" },
-  "remaining_post": { "message": "XMR)" },
+  "remaining_mid": { "message": "AEON (totalt" },
+  "remaining_post": { "message": "AEON)" },
   "expire_pre": { "message": "Förfaller om" },
   "expire_post": { "message": "" },
   "state_tobecreated": { "message": "Väntar på att lägga beställning" },
-  "state_unpaid": { "message": "Väntar på dina Monero" },
-  "state_underpaid": { "message": "Väntar på dina återstående Monero" },
+  "state_unpaid": { "message": "Väntar på dina AEON" },
+  "state_underpaid": { "message": "Väntar på dina återstående AEON" },
   "state_unconfirmed": { "message": "Betalning mottagen! Väntar på bekräftelse" },
   "state_paid": { "message": "Betalning mottagen och bekräftad! Skickar bitcoin" },
   "success_part1": { "message": "växlades till" },

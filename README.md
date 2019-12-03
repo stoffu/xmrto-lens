@@ -1,4 +1,4 @@
-XMR.to Lens
+AEON.to Lens
 ===============
 
-Chrome/Firefox extension for XMR.to
+Chrome/Firefox extension for AEON.to

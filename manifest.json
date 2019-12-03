@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "XMR.to Lens",
+  "name": "AEON.to Lens",
   "description": "__MSG_manifest_description__",
-  "version": "2.2.0",
+  "version": "1.0.0",
   "background": {
     "scripts": [ "background.js" ]
   },
@@ -21,7 +21,7 @@
      },
      "default_title": "__MSG_manifest_default_title__"
   },
-  "permissions": [ "https://xmr.to/", "https://test.xmr.to/" ],
+  "permissions": [ "https://aeon.to/" ],
   "web_accessible_resources": [ "*.gif", "*.png", "*.svg" ],
   "default_locale": "en"
 }

@@ -1,13 +1,13 @@
 {
   "manifest_description": {
-    "message": "Send Monero to a Bitcoin address using XMR.to",
-    "description": "The description of what XMR.to Lens is. Displayed in the web store."
+    "message": "Send AEON to a Bitcoin address using AEON.to",
+    "description": "The description of what AEON.to Lens is. Displayed in the web store."
   },
   "manifest_default_title": {
-    "message": "XMR.to Lens has found Bitcoin addresses on this page.",
+    "message": "AEON.to Lens has found Bitcoin addresses on this page.",
     "description": "Message shown over the Omnibox icon when Bitcoin addresses are found in the current page."
   },
-  "tooltip" : { "message": "Click to send Monero to this Bitcoin address" },
+  "tooltip" : { "message": "Click to send AEON to this Bitcoin address" },
   "success_header": { "message": "Success!" },
   "status": { "message": "Status" },
   "min": { "message": "Min" },
@@ -16,7 +16,7 @@
   "destination": { "message": "Destination" },
   "amount_in_bitcoin": { "message": "Amount in Bitcoin" },
   "pay": { "message": "Pay" },
-  "calling_api": { "message": "Calling XMR.to's API... " },
+  "calling_api": { "message": "Calling AEON.to's API... " },
   "send_pre": { "message": "Send" },
   "send_post": { "message": "to" },
   "paymentid": { "message": "with Payment ID" },
@@ -27,13 +27,13 @@
   "commandline": { "message": "Command line" },
   "qrcode": { "message": "QR code" },
   "remaining_pre": { "message": "remaining" },
-  "remaining_mid": { "message": "XMR (totaling" },
-  "remaining_post": { "message": "XMR)" },
+  "remaining_mid": { "message": "AEON (totaling" },
+  "remaining_post": { "message": "AEON)" },
   "expire_pre": { "message": "Expires in" },
   "expire_post": { "message": "" },
   "state_tobecreated": { "message": "Order creation pending" },
-  "state_unpaid": { "message": "Awaiting your Monero" },
-  "state_underpaid": { "message": "Awaiting your remaining Monero" },
+  "state_unpaid": { "message": "Awaiting your AEON" },
+  "state_underpaid": { "message": "Awaiting your remaining AEON" },
   "state_unconfirmed": { "message": "Payment received! Waiting for confirmation" },
   "state_paid": { "message": "Payment received and confirmed! Now sending Bitcoin" },
   "success_part1": { "message": "was converted to" },

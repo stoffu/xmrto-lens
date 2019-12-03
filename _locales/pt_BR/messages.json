@@ -1,10 +1,10 @@
 {
   "manifest_description": {
-    "message": "Enviar Monero para um endereço Bitcoin usando o XMR.to",
-    "description": "Descrição sobre o que é o XMR.to Lens está localizada no Chrome Webstore."
+    "message": "Enviar AEON para um endereço Bitcoin usando o AEON.to",
+    "description": "Descrição sobre o que é o AEON.to Lens está localizada no Chrome Webstore."
   },
   "manifest_default_title": {
-    "message": "XMR.to Lens encontrou endereços Bitcoin nesta página.",
+    "message": "AEON.to Lens encontrou endereços Bitcoin nesta página.",
     "description": "Messagem exibida sobre o ícone do Omnibox quando endereços Bitcoin são encontrados na página atual."
   },
   "success_header": { "message": "Sucesso!" },
@@ -15,7 +15,7 @@
   "destination": { "message": "Destino" },
   "amount_in_bitcoin": { "message": "Valor em Bitcoin" },
   "pay": { "message": "Pagar" },
-  "calling_api": { "message": "Contactando API do XMR.to... " },
+  "calling_api": { "message": "Contactando API do AEON.to... " },
   "send_pre": { "message": "Enviar" },
   "send_post": { "message": "para" },
   "paymentid": { "message": "com este Payment ID" },
@@ -26,13 +26,13 @@
   "commandline": { "message": "Linha de comando" },
   "qrcode": { "message": "QR code" },
   "remaining_pre": { "message": "Restando" },
-  "remaining_mid": { "message": "XMR (totalizando" },
-  "remaining_post": { "message": "XMR)" },
+  "remaining_mid": { "message": "AEON (totalizando" },
+  "remaining_post": { "message": "AEON)" },
   "expire_pre": { "message": "Expira em" },
   "expire_post": { "message": "" },
   "state_tobecreated": { "message": "Criação do pedido pendente" },
-  "state_unpaid": { "message": "Esperando seus Monero" },
-  "state_underpaid": { "message": "Esperando seus Monero restantes" },
+  "state_unpaid": { "message": "Esperando seus AEON" },
+  "state_underpaid": { "message": "Esperando seus AEON restantes" },
   "state_unconfirmed": { "message": "Pagamento recebido! Esperando confirmação" },
   "state_paid": { "message": "Pagamento recebido e confirmado! Agora sera enviado o Bitcoin" },
   "success_part1": { "message": "foi convertido para" },

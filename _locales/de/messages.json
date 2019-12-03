@@ -1,17 +1,17 @@
 {
   "manifest_description": {
-    "message": "Senden Sie Monero an eine Bitcoin Adresse mit XMR.to"
+    "message": "Senden Sie AEON an eine Bitcoin Adresse mit AEON.to"
   },
   "manifest_default_title": {
-    "message": "XMR.to Lens hat Bitcoin Adressen auf dieser Seite gefunden."
+    "message": "AEON.to Lens hat Bitcoin Adressen auf dieser Seite gefunden."
   },
-  "tooltip" : { "message": "Klicken Sie hier, um Monero an diese Bitcoin Adresse zu senden" },
+  "tooltip" : { "message": "Klicken Sie hier, um AEON an diese Bitcoin Adresse zu senden" },
   "success_header": { "message": "Erfolg!" },
   "rate": { "message": "Satz" },
   "destination": { "message": "Ziel" },
   "amount_in_bitcoin": { "message": "Betrag in Bitcoin" },
   "pay": { "message": "Zahlen" },
-  "calling_api": { "message": "Wir rufen die XMR.to API an... " },
+  "calling_api": { "message": "Wir rufen die AEON.to API an... " },
   "send_pre": { "message": "Senden Sie" },
   "send_post": { "message": "an" },
   "paymentid": { "message": "mit Zahlungs-ID" },
@@ -21,13 +21,13 @@
   "orderkey": { "message": "Bestellen Schlüssel" },
   "commandline": { "message": "Befehlszeile" },
   "remaining_pre": { "message": "restlichen" },
-  "remaining_mid": { "message": "XMR (insgesamt" },
-  "remaining_post": { "message": "XMR)" },
+  "remaining_mid": { "message": "AEON (insgesamt" },
+  "remaining_post": { "message": "AEON)" },
   "expire_pre": { "message": "Läuft in" },
   "expire_post": { "message": "ab" },
   "state_tobecreated": { "message": "Auftragserstellung steht noch aus" },
-  "state_unpaid": { "message": "Auf Ihr Monero warten" },
-  "state_underpaid": { "message": "Auf Ihr restlichen Monero warten" },
+  "state_unpaid": { "message": "Auf Ihr AEON warten" },
+  "state_underpaid": { "message": "Auf Ihr restlichen AEON warten" },
   "state_unconfirmed": { "message": "Die Zahlung wurde eingegangen! Auf Bestätigung warten" },
   "state_paid": { "message": "Die Zahlung wurde eingegangen und bestätigt! Jetzt Bitcoin senden" },
   "success_part1": { "message": "wurde in" },

@@ -1,10 +1,10 @@
 {
   "manifest_description": {
-    "message": "Envoyez des Moneroj vers une adresse Bitcoin via XMR.to",
-    "description": "La description de XMR.to Lens est. Affiché dans l'app store."
+    "message": "Envoyez des AEON vers une adresse Bitcoin via AEON.to",
+    "description": "La description de AEON.to Lens est. Affiché dans l'app store."
   },
   "manifest_default_title": {
-    "message": "XMR.to Lens a trouvé une adresse Bitcoin dans cette page.",
+    "message": "AEON.to Lens a trouvé une adresse Bitcoin dans cette page.",
     "description": "Message s'affichant au dessus de l'icone Omnibox lorsqu'une adresse est trouvée dans la page courante."
   },
   "success_header": { "message": "Succès!" },
@@ -15,7 +15,7 @@
   "destination": { "message": "Destination" },
   "amount_in_bitcoin": { "message": "Montant en Bitcoin" },
   "pay": { "message": "Payer" },
-  "calling_api": { "message": "Utilisation de l'API d'XMR.to... " },
+  "calling_api": { "message": "Utilisation de l'API d'AEON.to... " },
   "send_pre": { "message": "Envoyer" },
   "send_post": { "message": "à" },
   "paymentid": { "message": "avec le Payment ID" },
@@ -26,13 +26,13 @@
   "commandline": { "message": "Ligne de commande" },
   "qrcode": { "message": "QR code" },
   "remaining_pre": { "message": "restant" },
-  "remaining_mid": { "message": "XMR (au total" },
-  "remaining_post": { "message": "XMR)" },
+  "remaining_mid": { "message": "AEON (au total" },
+  "remaining_post": { "message": "AEON)" },
   "expire_pre": { "message": "Expire dans" },
   "expire_post": { "message": "" },
   "state_tobecreated": { "message": "Creation de l'ordre en cours" },
-  "state_unpaid": { "message": "En attente de vos Moneroj" },
-  "state_underpaid": { "message": "En attente de Moneroj manquants" },
+  "state_unpaid": { "message": "En attente de vos AEON" },
+  "state_underpaid": { "message": "En attente de AEON manquants" },
   "state_unconfirmed": { "message": "Paiement reçu! En attente de confirmation" },
   "state_paid": { "message": "Paiment reçu et confirmé! Envoi des bitcoins" },
   "success_part1": { "message": "a été converti en" },

@@ -24,11 +24,11 @@ function inject_lens_icon(node) {
 }
 
 function show_error(msg) {
-    // At any point in the process, if the XMR.to api returns any kind of error,
+    // At any point in the process, if the AEON.to api returns any kind of error,
     // this text gets placed into the page.
     $("#xmrto-lens-modal").html(
         "<div class='ui-state-error ui-corner-all xmrto-error'>" +
-            "XMR.to API returned an Error:<br><br>" +
+            "AEON.to API returned an Error:<br><br>" +
             "<span class='ui-state-error-text xmrto-error-text'>" + msg + "</span>" +
         "</div>"
     );
@@ -103,7 +103,7 @@ function inject_modal() {
             btc_dest_address: btc_dest_address
         };
         $("#xmrto-lens-modal").html("<span class='hspace-10'></span>" + chrome.i18n.getMessage("calling_api") + spinner);
-        $.post(endpoint + "/xmr2btc/order_create/", order_create_param).done(function(order_create_res) {
+        $.post(endpoint + "/aeon2btc/order_create/", order_create_param).done(function(order_create_res) {
             if(order_create_res.error) {
                 show_error(order_create_res.error_msg);
                 return;
@@ -117,19 +117,18 @@ function inject_modal() {
                 }
                 // cehck the satus every 5 seconds
                 if(ticks % 5 == 0) {
-                    $.post(endpoint + "/xmr2btc/order_status_query/", { uuid: order_create_res.uuid } ).done(function(order_status_query_res) {
+                    $.post(endpoint + "/aeon2btc/order_status_query/", { uuid: order_create_res.uuid } ).done(function(order_status_query_res) {
                         if (order_status_query_res.error) {
                             show_error(order_status_query_res.error_msg);
                             clearInterval(interval_id);
                             return;
                         }
 
-                        var btc_num_confirmations           = order_status_query_res.btc_num_confirmations;
-                        var btc_transaction_id              = order_status_query_res.btc_transaction_id;
-                        var xmr_amount_total                = order_status_query_res.xmr_amount_total;
-                        var xmr_amount_remaining            = order_status_query_res.xmr_amount_remaining;
-                        var xmr_receiving_integrated_address = order_status_query_res.xmr_receiving_integrated_address;
-                        var xmr_required_amount             = order_status_query_res.xmr_required_amount;
+                        var btc_num_confirmations        = order_status_query_res.btc_num_confirmations;
+                        var btc_transaction_id           = order_status_query_res.btc_transaction_id;
+                        var incoming_amount_total        = order_status_query_res.incoming_amount_total;
+                        var remaining_amount_incoming    = order_status_query_res.remaining_amount_incoming;
+                        var receiving_integrated_address = order_status_query_res.receiving_integrated_address;
 
                         state                = order_status_query_res.state;
                         seconds_till_timeout = order_status_query_res.seconds_till_timeout;
@@ -137,8 +136,8 @@ function inject_modal() {
                         var panel_body =
                         "<div class='xmrto-panel-body'>" +
                             "<div>" + chrome.i18n.getMessage("send_pre") + " <span class='xmrto-remaining-amount text-white'></span> " + chrome.i18n.getMessage("send_post") +":<div>" +
-                            "<div class='text-white' style='word-wrap: break-word'>" + xmr_receiving_integrated_address + "</div>" + 
-                            // "<div>" + chrome.i18n.getMessage("paymentid") + " <span class='text-white'>" + xmr_required_payment_id + "</span><div>" +
+                            "<div class='text-white' style='word-wrap: break-word'>" + receiving_integrated_address + "</div>" + 
+                            // "<div>" + chrome.i18n.getMessage("paymentid") + " <span class='text-white'>" + aeon_required_payment_id + "</span><div>" +
                             // "<div class='text-small text-bold text-orange'>" + chrome.i18n.getMessage("caution") + "</div>" +
                             "<div class='vspace-20'></div>" +
                             "<div>" + chrome.i18n.getMessage("convert_pre") + " <span class='text-white'>" + btc_amount + "</span> " + chrome.i18n.getMessage("convert_post") + "</div>" +
@@ -148,7 +147,7 @@ function inject_modal() {
                             "<div class='text-white'>" + order_create_res.uuid + "</div>" +
                             "<div class='vspace-10'></div>" +
                             "<div>" + chrome.i18n.getMessage("commandline") + ":</div>" +
-                            "<div class='text-xsmall'><textarea class='width-100' style='height:60px' onclick='this.select()'>transfer normal " + xmr_receiving_integrated_address + " " + xmr_amount_remaining + "</textarea></div>" +
+                            "<div class='text-xsmall'><textarea class='width-100' style='height:60px' onclick='this.select()'>transfer normal " + receiving_integrated_address + " " + remaining_amount_incoming + "</textarea></div>" +
                             "<div class='vspace-10'></div>" +
                             "<div>" + chrome.i18n.getMessage("qrcode") + ":</div>" +
                             "<div id='xmrto-qrcode'></div>" +
@@ -164,20 +163,20 @@ function inject_modal() {
                             $("#xmrto-lens-modal").html(panel_body + status_outer);
 
                             var qrstring =
-                                "monero:" + xmr_receiving_integrated_address +
-                                "?tx_amount=" + xmr_amount_remaining +
-                                "&recipient_name=XMR.to" +
+                                "aeon:" + receiving_integrated_address +
+                                "?tx_amount=" + remaining_amount_incoming +
+                                "&recipient_name=AEON.to" +
                                 "&tx_description=Paying%20" + btc_amount + "%20BTC%20to%20" + btc_dest_address;
                             new QRCode(document.getElementById("xmrto-qrcode"), qrstring);
 
                             if (state == "UNDERPAID") {
                                 $("#xmrto-lens-modal .xmrto-remaining-amount").text(
-                                    chrome.i18n.getMessage("remaining_pre") + " " + xmr_amount_remaining + " " + 
-                                    chrome.i18n.getMessage("remaining_mid") + " " + xmr_amount_total + " " +
+                                    chrome.i18n.getMessage("remaining_pre") + " " + remaining_amount_incoming + " " + 
+                                    chrome.i18n.getMessage("remaining_mid") + " " + incoming_amount_total + " " +
                                     chrome.i18n.getMessage("remaining_post")
                                 );
                             } else {
-                                $("#xmrto-lens-modal .xmrto-remaining-amount").text(xmr_amount_remaining + " XMR");
+                                $("#xmrto-lens-modal .xmrto-remaining-amount").text(remaining_amount_incoming + " AEON");
                             }
 
                         } else {
@@ -207,7 +206,7 @@ function inject_modal() {
                                     "<div class='text-white'>" + order_create_res.uuid + "</div>" +
                                     "<div class='vspace-10'></div>" +
                                     "<div>" +
-                                        "<span class='text-white'>" + xmr_required_amount + " XMR</span> " +
+                                        "<span class='text-white'>" + incoming_amount_total + " AEON</span> " +
                                         chrome.i18n.getMessage("success_part1") + " <span class='text-white'>" + btc_amount + " BTC</span> " +
                                         chrome.i18n.getMessage("success_part2") +
                                     " </div>" +
@@ -274,7 +273,7 @@ function wrapMatchesInNode(textNode) {
 inject_lens_icon(document.body);
 
 var isTestNet, isProdNet;
-var endpoint = 'https://xmr.to/api/v2';
+var endpoint = 'https://aeon.to/api/v3';
 
 $(function() {
     $("body").on("click", '.xmrto-lens-link', function(event) {
@@ -289,9 +288,9 @@ $(function() {
 
         // change endpoint to use stagenet
         if (isTestNet) {
-          endpoint = 'https://test.xmr.to/api/v2';
+          endpoint = 'https://test.aeon.to/api/v3';
         } else if (isProdNet) {
-          endpoint = 'https://xmr.to/api/v2';
+          endpoint = 'https://aeon.to/api/v3';
         } else {
           // exit if address is not valid
           return;
@@ -299,9 +298,9 @@ $(function() {
 
         console.log('opening');
 
-      $.get(endpoint + "/xmr2btc/order_parameter_query/", function(response) {
+      $.get(endpoint + "/aeon2btc/order_parameter_query/", function(response) {
         if(response.error) {
-          show_error("XMR.to API returned an error: " + response.error_msg);
+          show_error("AEON.to API returned an error: " + response.error_msg);
           return;
         }
 
@@ -316,7 +315,7 @@ $(function() {
         $("#xmrto-lens-modal .xmrto-estimation-amount").text(response.zero_conf_max_amount + " BTC");
         $("#xmrto-lens-modal .xmrto-min-limit").text(response.lower_limit + " BTC");
         $("#xmrto-lens-modal .xmrto-max-limit").text(response.upper_limit + " BTC");
-        $("#xmrto-lens-modal .xmrto-rate").text("1 XMR = " + response.price + " BTC");
+        $("#xmrto-lens-modal .xmrto-rate").text("1 AEON = " + response.price + " BTC");
       });
 
         $("#xmrto-lens-modal .xmrto-address").val(address);
@@ -324,7 +323,7 @@ $(function() {
             show: { effect: "fade", duration: 300 },
             dialogClass: 'xmrto-dialog',
             width: "600px",
-            title: "XMR.to Lens",
+            title: "AEON.to Lens",
             close: function(event) {
                 $("#xmrto-lens-modal").remove();
                 already_injected = false;
