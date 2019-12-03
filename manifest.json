@@ -2,13 +2,13 @@
   "manifest_version": 2,
   "name": "XMR.TO Lens",
   "description": "__MSG_manifest_description__",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "background": {
     "scripts": [ "background.js" ]
   },
   "content_scripts": [ {
     "css": [ "jquery-ui.min.css", "xmrto-lens.css" ],
-    "js": [ "jquery-2.1.1.min.js", "wallet-address-validator.js", "jquery-ui.min.js", "qrcode.js", "xmrto-lens.js" ],
+    "js": [ "jquery-3.4.1.min.js", "wallet-address-validator.js", "jquery-ui.min.js", "qrcode.js", "xmrto-lens.js" ],
     "matches": [ "\u003Call_urls>" ]
   } ],
   "icons": {
