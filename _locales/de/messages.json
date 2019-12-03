@@ -1,9 +1,9 @@
 {
   "manifest_description": {
-    "message": "Senden Sie Monero an eine Bitcoin Adresse mit XMR.TO"
+    "message": "Senden Sie Monero an eine Bitcoin Adresse mit XMR.to"
   },
   "manifest_default_title": {
-    "message": "XMR.TO Lens hat Bitcoin Adressen auf dieser Seite gefunden."
+    "message": "XMR.to Lens hat Bitcoin Adressen auf dieser Seite gefunden."
   },
   "tooltip" : { "message": "Klicken Sie hier, um Monero an diese Bitcoin Adresse zu senden" },
   "success_header": { "message": "Erfolg!" },
@@ -11,7 +11,7 @@
   "destination": { "message": "Ziel" },
   "amount_in_bitcoin": { "message": "Betrag in Bitcoin" },
   "pay": { "message": "Zahlen" },
-  "calling_api": { "message": "Wir rufen die XMR.TO API an... " },
+  "calling_api": { "message": "Wir rufen die XMR.to API an... " },
   "send_pre": { "message": "Senden Sie" },
   "send_post": { "message": "an" },
   "paymentid": { "message": "mit Zahlungs-ID" },

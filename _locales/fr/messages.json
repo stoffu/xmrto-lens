@@ -1,10 +1,10 @@
 {
   "manifest_description": {
-    "message": "Envoyez des Moneroj vers une adresse Bitcoin via XMR.TO",
-    "description": "La description de XMR.TO Lens est. Affiché dans l'app store."
+    "message": "Envoyez des Moneroj vers une adresse Bitcoin via XMR.to",
+    "description": "La description de XMR.to Lens est. Affiché dans l'app store."
   },
   "manifest_default_title": {
-    "message": "XMR.TO Lens a trouvé une adresse Bitcoin dans cette page.",
+    "message": "XMR.to Lens a trouvé une adresse Bitcoin dans cette page.",
     "description": "Message s'affichant au dessus de l'icone Omnibox lorsqu'une adresse est trouvée dans la page courante."
   },
   "success_header": { "message": "Succès!" },
@@ -15,7 +15,7 @@
   "destination": { "message": "Destination" },
   "amount_in_bitcoin": { "message": "Montant en Bitcoin" },
   "pay": { "message": "Payer" },
-  "calling_api": { "message": "Utilisation de l'API d'XMR.TO... " },
+  "calling_api": { "message": "Utilisation de l'API d'XMR.to... " },
   "send_pre": { "message": "Envoyer" },
   "send_post": { "message": "à" },
   "paymentid": { "message": "avec le Payment ID" },

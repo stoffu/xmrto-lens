@@ -1,10 +1,10 @@
 {
   "manifest_description": {
-    "message": "Enviar Monero para um endereço Bitcoin usando o XMR.TO",
-    "description": "Descrição sobre o que é o XMR.TO Lens está localizada no Chrome Webstore."
+    "message": "Enviar Monero para um endereço Bitcoin usando o XMR.to",
+    "description": "Descrição sobre o que é o XMR.to Lens está localizada no Chrome Webstore."
   },
   "manifest_default_title": {
-    "message": "XMT.TO Lens encontrou endereços Bitcoin nesta página.",
+    "message": "XMR.to Lens encontrou endereços Bitcoin nesta página.",
     "description": "Messagem exibida sobre o ícone do Omnibox quando endereços Bitcoin são encontrados na página atual."
   },
   "success_header": { "message": "Sucesso!" },
@@ -15,7 +15,7 @@
   "destination": { "message": "Destino" },
   "amount_in_bitcoin": { "message": "Valor em Bitcoin" },
   "pay": { "message": "Pagar" },
-  "calling_api": { "message": "Contactando API do XMR.TO... " },
+  "calling_api": { "message": "Contactando API do XMR.to... " },
   "send_pre": { "message": "Enviar" },
   "send_post": { "message": "para" },
   "paymentid": { "message": "com este Payment ID" },

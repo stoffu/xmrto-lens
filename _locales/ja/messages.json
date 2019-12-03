@@ -1,9 +1,9 @@
 {
   "manifest_description": {
-    "message": "XMR.TOを使って、ビットコインアドレスにモネロを送金します"
+    "message": "XMR.toを使って、ビットコインアドレスにモネロを送金します"
   },
   "manifest_default_title": {
-    "message": "XMR.TO Lensはこのページ上にビットコインアドレスを発見しました。"
+    "message": "XMR.to Lensはこのページ上にビットコインアドレスを発見しました。"
   },
   "success_header": { "message": "成功!" },
   "status": { "message": "状態" },
@@ -13,7 +13,7 @@
   "destination": { "message": "送金先" },
   "amount_in_bitcoin": { "message": "ビットコインの額" },
   "pay": { "message": "支払う" },
-  "calling_api": { "message": "XMR.TOのAPIを呼び出しています " },
+  "calling_api": { "message": "XMR.toのAPIを呼び出しています " },
   "send_pre": { "message": "" },
   "send_post": { "message": "を以下のアドレスに送金してください" },
   "paymentid": { "message": "その際、以下のペイメントIDを添付してください:" },

@@ -1,10 +1,10 @@
 {
   "manifest_description": {
-    "message": "使用 XMR.TO 將 Monero 直接轉帳到 Bitcoin 的地址",
-    "description": "The description of what XMR.TO Lens is. Displayed in the web store."
+    "message": "使用 XMR.to 將 Monero 直接轉帳到 Bitcoin 的地址",
+    "description": "The description of what XMR.to Lens is. Displayed in the web store."
   },
   "manifest_default_title": {
-    "message": "XMR.TO Lens 已在這個頁面上找到 BItcoin 的地址",
+    "message": "XMR.to Lens 已在這個頁面上找到 BItcoin 的地址",
     "description": "Message shown over the Omnibox icon when Bitcoin addresses are found in the current page."
   },
   "success_header": { "message": "成功!" },
@@ -15,7 +15,7 @@
   "destination": { "message": "收款地址" },
   "amount_in_bitcoin": { "message": "Bitcoin 的金額" },
   "pay": { "message": "付款" },
-  "calling_api": { "message": "正在連接 XMR.TO's API... " },
+  "calling_api": { "message": "正在連接 XMR.to's API... " },
   "send_pre": { "message": "請付款" },
   "send_post": { "message": "至以下地址" },
   "paymentid": { "message": "附上 Payment ID" },

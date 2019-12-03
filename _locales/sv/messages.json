@@ -1,10 +1,10 @@
 {
   "manifest_description": {
-    "message": "Skicka Monero till en Bitcoin adress genom att använda XMR.TO",
-    "description": "The description of what XMR.TO Lens is. Displayed in the web store."
+    "message": "Skicka Monero till en Bitcoin adress genom att använda XMR.to",
+    "description": "The description of what XMR.to Lens is. Displayed in the web store."
   },
   "manifest_default_title": {
-    "message": "XMR.TO Lens har hittat Bitcoin-adresser på denna sida.",
+    "message": "XMR.to Lens har hittat Bitcoin-adresser på denna sida.",
     "description": "Message shown over the Omnibox icon when Bitcoin addresses are found in the current page."
   },
   "tooltip" : { "message": "Klicka för att skicka Monero till denna Bitcoin-adress" },
@@ -16,7 +16,7 @@
   "destination": { "message": "Mottagare" },
   "amount_in_bitcoin": { "message": "Belopp i Bitcoin" },
   "pay": { "message": "Betala" },
-  "calling_api": { "message": "Anropar XMR.TO:s API... " },
+  "calling_api": { "message": "Anropar XMR.to:s API... " },
   "send_pre": { "message": "Sicka" },
   "send_post": { "message": "till" },
   "paymentid": { "message": "Med betalnings-ID" },

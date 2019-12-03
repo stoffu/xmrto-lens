@@ -1,10 +1,10 @@
 {
   "manifest_description": {
-    "message": "Send Monero to a Bitcoin address using XMR.TO",
-    "description": "The description of what XMR.TO Lens is. Displayed in the web store."
+    "message": "Send Monero to a Bitcoin address using XMR.to",
+    "description": "The description of what XMR.to Lens is. Displayed in the web store."
   },
   "manifest_default_title": {
-    "message": "XMR.TO Lens has found Bitcoin addresses on this page.",
+    "message": "XMR.to Lens has found Bitcoin addresses on this page.",
     "description": "Message shown over the Omnibox icon when Bitcoin addresses are found in the current page."
   },
   "tooltip" : { "message": "Click to send Monero to this Bitcoin address" },
@@ -16,7 +16,7 @@
   "destination": { "message": "Destination" },
   "amount_in_bitcoin": { "message": "Amount in Bitcoin" },
   "pay": { "message": "Pay" },
-  "calling_api": { "message": "Calling XMR.TO's API... " },
+  "calling_api": { "message": "Calling XMR.to's API... " },
   "send_pre": { "message": "Send" },
   "send_post": { "message": "to" },
   "paymentid": { "message": "with Payment ID" },

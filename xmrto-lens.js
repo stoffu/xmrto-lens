@@ -24,11 +24,11 @@ function inject_lens_icon(node) {
 }
 
 function show_error(msg) {
-    // At any point in the process, if the XMR.TO api returns any kind of error,
+    // At any point in the process, if the XMR.to api returns any kind of error,
     // this text gets placed into the page.
     $("#xmrto-lens-modal").html(
         "<div class='ui-state-error ui-corner-all xmrto-error'>" +
-            "XMR.TO API returned an Error:<br><br>" +
+            "XMR.to API returned an Error:<br><br>" +
             "<span class='ui-state-error-text xmrto-error-text'>" + msg + "</span>" +
         "</div>"
     );
@@ -166,7 +166,7 @@ function inject_modal() {
                             var qrstring =
                                 "monero:" + xmr_receiving_integrated_address +
                                 "?tx_amount=" + xmr_amount_remaining +
-                                "&recipient_name=XMR.TO" +
+                                "&recipient_name=XMR.to" +
                                 "&tx_description=Paying%20" + btc_amount + "%20BTC%20to%20" + btc_dest_address;
                             new QRCode(document.getElementById("xmrto-qrcode"), qrstring);
 
@@ -301,7 +301,7 @@ $(function() {
 
       $.get(endpoint + "/xmr2btc/order_parameter_query/", function(response) {
         if(response.error) {
-          show_error("XMR.TO API returned an error: " + response.error_msg);
+          show_error("XMR.to API returned an error: " + response.error_msg);
           return;
         }
 
@@ -324,7 +324,7 @@ $(function() {
             show: { effect: "fade", duration: 300 },
             dialogClass: 'xmrto-dialog',
             width: "600px",
-            title: "XMR.TO Lens",
+            title: "XMR.to Lens",
             close: function(event) {
                 $("#xmrto-lens-modal").remove();
                 already_injected = false;
