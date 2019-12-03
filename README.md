@@ -1,4 +1,4 @@
 XMR.TO Lens
 ===============
 
-Chrome extension for XMR.TO
+Chrome/Firefox extension for XMR.TO
