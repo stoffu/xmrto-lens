@@ -39,7 +39,7 @@ function show_success(msg) {
     // the transaction went successfully.
     $("#xmrto-lens-modal").html(
         "<div class='xmrto-success'>" +
-            "<div class='text-orange text-bold text-xlarge'>" + chrome.i18n.getMessage("success_header") + "</div>" +
+            "<div class='text-green text-bold text-xlarge'>" + chrome.i18n.getMessage("success_header") + "</div>" +
             "<div class='vspace-10'></div>" +
             msg +
         "</div>"
