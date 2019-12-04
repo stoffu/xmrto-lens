@@ -22,6 +22,6 @@
      "default_title": "__MSG_manifest_default_title__"
   },
   "permissions": [ "https://xmr.to/" ],
-  "web_accessible_resources": [ "*.gif", "*.png" ],
+  "web_accessible_resources": [ "*.gif", "*.png", "*.svg" ],
   "default_locale": "en"
 }
