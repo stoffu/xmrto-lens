@@ -254,7 +254,7 @@ icon_url = chrome.extension.getURL("lens_icon.svg");
 
 function wrapMatchesInNode(textNode) {
     var temp = document.createElement('div');
-    temp.innerHTML = textNode.data.replace(btc_regex, '$& <a class="xmrto-lens-link" href="#" data-address="$&"><img style="height:12px" title="' + chrome.i18n.getMessage('tooltip') + '" src="' + icon_url + '"></a> ');
+    saferInnerHTML(temp, textNode.data.replace(btc_regex, '$& <a class="xmrto-lens-link" href="#" data-address="$&"><img style="height:12px" title="' + chrome.i18n.getMessage('tooltip') + '" src="' + icon_url + '"></a> '));
     // temp.innerHTML is now:
     // "\n    This order's reference number is <a href="/order/RF83297">RF83297</a>.\n"
     // |_______________________________________|__________________________________|___|

@@ -251,7 +251,7 @@ var QRCode;
 			}
 			
 			aHTML.push('</table>');
-			_el.innerHTML = aHTML.join('');
+			saferInnerHTML(_el, aHTML.join(''));
 			
 			// Fix the margin values as real size.
 			var elTable = _el.childNodes[0];
