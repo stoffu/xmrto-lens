@@ -68,7 +68,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
-#xmrto-lens-modal {
+#aeonto-lens-modal {
   display: none;
   text-align: left;
   font-size: medium;
@@ -79,7 +79,7 @@ input[type=number]::-webkit-outer-spin-button {
   background: #3B3B3B;
 }
 
-.xmrto-panel-header {
+.aeonto-panel-header {
   border-bottom:1px solid #000;
   box-shadow: 0 1px 0 rgba(255,255,255,.2);
   padding:10px 20px;
@@ -87,16 +87,16 @@ input[type=number]::-webkit-outer-spin-button {
   overflow: hidden;
 }
 
-.xmrto-panel-header .xmrto-min-limit {
+.aeonto-panel-header .aeonto-min-limit {
   padding-right: 10px;
 }
 
-.xmrto-panel-body {
+.aeonto-panel-body {
   padding:20px 20px 12px 20px;
   background: #4C4C4C;
 }
 
-.xmrto-form-control {
+.aeonto-form-control {
   border-radius: 4px;
   border:0;
   padding:12px 10px;
@@ -104,24 +104,24 @@ input[type=number]::-webkit-outer-spin-button {
   box-sizing: border-box;
 }
 
-.xmrto-panel-body .xmrto-address {
+.aeonto-panel-body .aeonto-address {
   margin-left: 75px;
   width: 70% !important;
 }
 
-.xmrto-panel-body .xmrto-estimation-time {
+.aeonto-panel-body .aeonto-estimation-time {
   margin-left: 160px;
   margin-top: 15px;
   font-size: 14px;
   white-space: nowrap;
 }
 
-.xmrto-panel-body .xmrto-amount {
+.aeonto-panel-body .aeonto-amount {
   margin-left: 30px;
   width: 35% !important;
 }
 
-#xmrto-lens-modal button {
+#aeonto-lens-modal button {
   border-radius: 4px;
   border:0;
   background: #2bd;
@@ -131,7 +131,7 @@ input[type=number]::-webkit-outer-spin-button {
   box-sizing: border-box;
 }
 
-#xmrto-qrcode img {
+#aeonto-qrcode img {
   text-align: center;
   margin: 10px auto 0 auto;
   padding:5px;
@@ -139,7 +139,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 4px;
 }
 
-.xmrto-status-outer {
+.aeonto-status-outer {
   display: block;
   background: #3B3B3B;
   padding:20px;
@@ -149,36 +149,36 @@ input[type=number]::-webkit-outer-spin-button {
   overflow: hidden;
 }
 
-#xmrto-lens-modal .xmrto-success {
+#aeonto-lens-modal .aeonto-success {
   padding:20px;
   border:0;
 }
 
-.ui-widget-content.xmrto-dialog {
+.ui-widget-content.aeonto-dialog {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	box-shadow: 0 0 30px 2px rgba(0,0,0,.4);
 }
 
-.ui-widget-content.xmrto-dialog {
+.ui-widget-content.aeonto-dialog {
 	padding:0 !important;
 	border:0;
 	background: #3B3B3B;
 }
-.xmrto-dialog .ui-dialog-buttonpane.ui-widget-content { 
+.aeonto-dialog .ui-dialog-buttonpane.ui-widget-content { 
 	background: #3B3B3B;
 	border:0;
 	border-radius: 0 0 4px 4px;
 	margin-top:0;
 }
 
-.xmrto-dialog .ui-dialog-titlebar.ui-widget-header {
+.aeonto-dialog .ui-dialog-titlebar.ui-widget-header {
 	background: #fff;
 	border-radius: 4px 4px 0px 0px;
 	border:0;
 	padding:10px 20px 10px 68px;
 	position: relative;
 }
-.xmrto-dialog .ui-dialog-titlebar.ui-widget-header:before {
+.aeonto-dialog .ui-dialog-titlebar.ui-widget-header:before {
 	content:"";
 	/* https://stackoverflow.com/a/24359746 */
 	/* https://stackoverflow.com/a/38175416 */
@@ -190,7 +190,7 @@ input[type=number]::-webkit-outer-spin-button {
 	top:4px;
 }
 
-.spinner {
+.aeonto-spinner {
   margin: 0 auto;
   width: 70px;
   text-align: center;
@@ -198,7 +198,7 @@ input[type=number]::-webkit-outer-spin-button {
   display: inline-block;
 }
 
-.spinner > div {
+.aeonto-spinner > div {
   width: 18px;
   height: 18px;
   background-color: #357;
@@ -211,12 +211,12 @@ input[type=number]::-webkit-outer-spin-button {
   animation-fill-mode: both;
 }
 
-.spinner .bounce1 {
+.aeonto-spinner .bounce1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 
-.spinner .bounce2 {
+.aeonto-spinner .bounce2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }

@@ -26,10 +26,10 @@ function inject_lens_icon(node) {
 function show_error(msg) {
     // At any point in the process, if the AEON.to api returns any kind of error,
     // this text gets placed into the page.
-    $("#xmrto-lens-modal").html(
-        "<div class='ui-state-error ui-corner-all xmrto-error'>" +
+    $("#aeonto-lens-modal").html(
+        "<div class='ui-state-error ui-corner-all aeonto-error'>" +
             "AEON.to API returned an Error:<br><br>" +
-            "<span class='ui-state-error-text xmrto-error-text'>" + msg + "</span>" +
+            "<span class='ui-state-error-text aeonto-error-text'>" + msg + "</span>" +
         "</div>"
     );
 }
@@ -37,8 +37,8 @@ function show_error(msg) {
 function show_success(msg) {
     // when the enire transaction is complete bring up this page telling them
     // the transaction went successfully.
-    $("#xmrto-lens-modal").html(
-        "<div class='xmrto-success'>" +
+    $("#aeonto-lens-modal").html(
+        "<div class='aeonto-success'>" +
             "<div class='text-green text-bold text-xlarge'>" + chrome.i18n.getMessage("success_header") + "</div>" +
             "<div class='vspace-10'></div>" +
             msg +
@@ -47,14 +47,14 @@ function show_success(msg) {
 }
 
 function show_status(msg, uuid) {
-    $("#xmrto-lens-modal .xmrto-status").html(
+    $("#aeonto-lens-modal .aeonto-status").html(
         "<div class='pull-left'>" + chrome.i18n.getMessage("status") + ": <span class='text-white'>" + msg + "</span></div>" +
         (uuid === undefined ? "" :
         "<div class='pull-left'>" + chrome.i18n.getMessage("orderkey") + ": <span class='text-white'>" + uuid + "</span></div>")
     );
 }
 
-var spinner = '<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
+var spinner = '<div class="aeonto-spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
 var interval_id;
 var already_injected = false;
 var btc_amount;
@@ -67,42 +67,42 @@ function inject_modal() {
     }
 
     $('body').append(
-    "<div id='xmrto-lens-modal'>" +
-        "<div class='xmrto-panel-header'>" +
-            "<div class='pull-left'>" + chrome.i18n.getMessage("min") + ": <span class='xmrto-min-limit text-white'></span> " + chrome.i18n.getMessage("max") + ": <span class='xmrto-max-limit text-white'></span></div>" +
-            "<div class='pull-right'>" + chrome.i18n.getMessage("rate") + ": <span class='xmrto-rate text-white'></span></div>" +
+    "<div id='aeonto-lens-modal'>" +
+        "<div class='aeonto-panel-header'>" +
+            "<div class='pull-left'>" + chrome.i18n.getMessage("min") + ": <span class='aeonto-min-limit text-white'></span> " + chrome.i18n.getMessage("max") + ": <span class='aeonto-max-limit text-white'></span></div>" +
+            "<div class='pull-right'>" + chrome.i18n.getMessage("rate") + ": <span class='aeonto-rate text-white'></span></div>" +
         "</div>"+
-        "<div class='xmrto-panel-body'>" +
+        "<div class='aeonto-panel-body'>" +
             "<div class='stagenet-label'>stagenet</div>" +
             "<div>" +
                 "<span class='text-white'>" + chrome.i18n.getMessage("destination") + ":</span>" +
-                "<input class='xmrto-address xmrto-form-control' disabled></input>" +
+                "<input class='aeonto-address aeonto-form-control' disabled></input>" +
             "</div>" +
             "<div class='vspace-20'></div>" +
             "<div>" +
                 "<span class='text-white'>" + chrome.i18n.getMessage("amount_in_bitcoin") + ":</span>" +
-                "<input class='xmrto-amount xmrto-form-control' type=number></input>" +
-                "<button class='xmrto-pay-button width-30 pull-right' disabled>" + chrome.i18n.getMessage("pay") + "</button>" +
+                "<input class='aeonto-amount aeonto-form-control' type=number></input>" +
+                "<button class='aeonto-pay-button width-30 pull-right' disabled>" + chrome.i18n.getMessage("pay") + "</button>" +
             "</div>" +
-            "<div class='xmrto-estimation-time'>" + chrome.i18n.getMessage("estimation_pre") + " <span class='xmrto-estimation-amount'></span> " + chrome.i18n.getMessage("estimation_post") + " </div>" +
+            "<div class='aeonto-estimation-time'>" + chrome.i18n.getMessage("estimation_pre") + " <span class='aeonto-estimation-amount'></span> " + chrome.i18n.getMessage("estimation_post") + " </div>" +
         "</div>" +
     "</div>"
     );
 
-    $("#xmrto-lens-modal .xmrto-amount").on("input", function() {
-        btc_amount = $("#xmrto-lens-modal .xmrto-amount").val()
-        $("#xmrto-lens-modal .xmrto-pay-button").prop("disabled", btc_amount < lower_limit || upper_limit < btc_amount);
+    $("#aeonto-lens-modal .aeonto-amount").on("input", function() {
+        btc_amount = $("#aeonto-lens-modal .aeonto-amount").val()
+        $("#aeonto-lens-modal .aeonto-pay-button").prop("disabled", btc_amount < lower_limit || upper_limit < btc_amount);
     });
 
-    $("#xmrto-lens-modal .xmrto-pay-button").click(function(event) {
+    $("#aeonto-lens-modal .aeonto-pay-button").click(function(event) {
 
-        var btc_dest_address = $("#xmrto-lens-modal .xmrto-address").val();
+        var btc_dest_address = $("#aeonto-lens-modal .aeonto-address").val();
 
         var order_create_param = {
             btc_amount: btc_amount,
             btc_dest_address: btc_dest_address
         };
-        $("#xmrto-lens-modal").html("<span class='hspace-10'></span>" + chrome.i18n.getMessage("calling_api") + spinner);
+        $("#aeonto-lens-modal").html("<span class='hspace-10'></span>" + chrome.i18n.getMessage("calling_api") + spinner);
         $.post(endpoint + "/aeon2btc/order_create/", order_create_param).done(function(order_create_res) {
             if(order_create_res.error) {
                 show_error(order_create_res.error_msg);
@@ -134,8 +134,8 @@ function inject_modal() {
                         seconds_till_timeout = order_status_query_res.seconds_till_timeout;
 
                         var panel_body =
-                        "<div class='xmrto-panel-body'>" +
-                            "<div>" + chrome.i18n.getMessage("send_pre") + " <span class='xmrto-remaining-amount text-white'></span> " + chrome.i18n.getMessage("send_post") +":<div>" +
+                        "<div class='aeonto-panel-body'>" +
+                            "<div>" + chrome.i18n.getMessage("send_pre") + " <span class='aeonto-remaining-amount text-white'></span> " + chrome.i18n.getMessage("send_post") +":<div>" +
                             "<div class='text-white' style='word-wrap: break-word'>" + receiving_integrated_address + "</div>" + 
                             // "<div>" + chrome.i18n.getMessage("paymentid") + " <span class='text-white'>" + aeon_required_payment_id + "</span><div>" +
                             // "<div class='text-small text-bold text-orange'>" + chrome.i18n.getMessage("caution") + "</div>" +
@@ -150,38 +150,38 @@ function inject_modal() {
                             "<div class='text-xsmall'><textarea class='width-100' style='height:60px' onclick='this.select()'>transfer normal " + receiving_integrated_address + " " + remaining_amount_incoming + "</textarea></div>" +
                             "<div class='vspace-10'></div>" +
                             "<div>" + chrome.i18n.getMessage("qrcode") + ":</div>" +
-                            "<div id='xmrto-qrcode'></div>" +
+                            "<div id='aeonto-qrcode'></div>" +
                         "</div>";
 
                         var status_outer =
-                        "<div class='xmrto-status-outer'>" +
-                            "<div class='xmrto-status pull-left'></div>" +
-                            "<div class='xmrto-timer pull-right'></div>" +
+                        "<div class='aeonto-status-outer'>" +
+                            "<div class='aeonto-status pull-left'></div>" +
+                            "<div class='aeonto-timer pull-right'></div>" +
                         "</div>";
 
                         if (state == "UNPAID" || state == "UNDERPAID") {
-                            $("#xmrto-lens-modal").html(panel_body + status_outer);
+                            $("#aeonto-lens-modal").html(panel_body + status_outer);
 
                             var qrstring =
                                 "aeon:" + receiving_integrated_address +
                                 "?tx_amount=" + remaining_amount_incoming +
                                 "&recipient_name=AEON.to" +
                                 "&tx_description=Paying%20" + btc_amount + "%20BTC%20to%20" + btc_dest_address;
-                            new QRCode(document.getElementById("xmrto-qrcode"), qrstring);
+                            new QRCode(document.getElementById("aeonto-qrcode"), qrstring);
 
                             if (state == "UNDERPAID") {
-                                $("#xmrto-lens-modal .xmrto-remaining-amount").text(
+                                $("#aeonto-lens-modal .aeonto-remaining-amount").text(
                                     chrome.i18n.getMessage("remaining_pre") + " " + remaining_amount_incoming + " " + 
                                     chrome.i18n.getMessage("remaining_mid") + " " + incoming_amount_total + " " +
                                     chrome.i18n.getMessage("remaining_post")
                                 );
                             } else {
-                                $("#xmrto-lens-modal .xmrto-remaining-amount").text(remaining_amount_incoming + " AEON");
+                                $("#aeonto-lens-modal .aeonto-remaining-amount").text(remaining_amount_incoming + " AEON");
                             }
 
                         } else {
                             // payment already received, so show the status only
-                            $("#xmrto-lens-modal").html(status_outer);
+                            $("#aeonto-lens-modal").html(status_outer);
                         }
 
                         switch (state) {
@@ -234,7 +234,7 @@ function inject_modal() {
                     var minutes = Math.floor(seconds_till_timeout / 60);
                     var seconds = seconds_till_timeout - minutes * 60;
                     var timeText = (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-                    $("#xmrto-lens-modal .xmrto-timer").text(chrome.i18n.getMessage("expire_pre") + " " + timeText + " " + chrome.i18n.getMessage("expire_post"));
+                    $("#aeonto-lens-modal .aeonto-timer").text(chrome.i18n.getMessage("expire_pre") + " " + timeText + " " + chrome.i18n.getMessage("expire_post"));
                 }
 
                 ticks++;
@@ -242,9 +242,9 @@ function inject_modal() {
         });
     });
 
-    $("#xmrto-lens-modal .xmrto-min-limit").html(spinner);
-    $("#xmrto-lens-modal .xmrto-max-limit").html(spinner);
-    $("#xmrto-lens-modal .xmrto-rate").html(spinner);
+    $("#aeonto-lens-modal .aeonto-min-limit").html(spinner);
+    $("#aeonto-lens-modal .aeonto-max-limit").html(spinner);
+    $("#aeonto-lens-modal .aeonto-rate").html(spinner);
 
     already_injected = true; // only inject once
 }
@@ -253,7 +253,7 @@ icon_url = chrome.extension.getURL("lens_icon.svg");
 
 function wrapMatchesInNode(textNode) {
     var temp = document.createElement('div');
-    saferInnerHTML(temp, textNode.data.replace(btc_regex, '$& <a class="xmrto-lens-link" href="#" data-address="$&"><img style="height:12px" title="' + chrome.i18n.getMessage('tooltip') + '" src="' + icon_url + '"></a> '));
+    saferInnerHTML(temp, textNode.data.replace(btc_regex, '$& <a class="aeonto-lens-link" href="#" data-address="$&"><img style="height:12px" title="' + chrome.i18n.getMessage('tooltip') + '" src="' + icon_url + '"></a> '));
     // temp.innerHTML is now:
     // "\n    This order's reference number is <a href="/order/RF83297">RF83297</a>.\n"
     // |_______________________________________|__________________________________|___|
@@ -276,7 +276,7 @@ var isTestNet, isProdNet;
 var endpoint = 'https://aeon.to/api/v3';
 
 $(function() {
-    $("body").on("click", '.xmrto-lens-link', function(event) {
+    $("body").on("click", '.aeonto-lens-link', function(event) {
         // When the user clicks on one of the fox icons embedded on the page,
         // this function gets called which launches the modal.
         event.preventDefault();
@@ -312,20 +312,20 @@ $(function() {
 
         lower_limit = response.lower_limit;
         upper_limit = response.upper_limit;
-        $("#xmrto-lens-modal .xmrto-estimation-amount").text(response.zero_conf_max_amount + " BTC");
-        $("#xmrto-lens-modal .xmrto-min-limit").text(response.lower_limit + " BTC");
-        $("#xmrto-lens-modal .xmrto-max-limit").text(response.upper_limit + " BTC");
-        $("#xmrto-lens-modal .xmrto-rate").text("1 AEON = " + response.price + " BTC");
+        $("#aeonto-lens-modal .aeonto-estimation-amount").text(response.zero_conf_max_amount + " BTC");
+        $("#aeonto-lens-modal .aeonto-min-limit").text(response.lower_limit + " BTC");
+        $("#aeonto-lens-modal .aeonto-max-limit").text(response.upper_limit + " BTC");
+        $("#aeonto-lens-modal .aeonto-rate").text("1 AEON = " + response.price + " BTC");
       });
 
-        $("#xmrto-lens-modal .xmrto-address").val(address);
-        $("#xmrto-lens-modal").dialog({
+        $("#aeonto-lens-modal .aeonto-address").val(address);
+        $("#aeonto-lens-modal").dialog({
             show: { effect: "fade", duration: 300 },
-            dialogClass: 'xmrto-dialog',
+            dialogClass: 'aeonto-dialog',
             width: "600px",
             title: "AEON.to Lens",
             close: function(event) {
-                $("#xmrto-lens-modal").remove();
+                $("#aeonto-lens-modal").remove();
                 already_injected = false;
                 inject_modal();
                 clearInterval(interval_id);
